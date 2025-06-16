@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { InlineWidget } from 'react-calendly'
+import { InlineWidget, useCalendlyEventListener } from 'react-calendly'
 import { calendlyApi, formApi, UpdateSubmissionPayload } from '../utils/api'
 import { getWidgetConfig } from '../config/calendly'
 import CountrySelector from './CountrySelector'
@@ -33,8 +33,6 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
   const [organization, setOrganization] = useState('')
   const [linkedinUrl, setLinkedinUrl] = useState('')
   const [sectors, setSectors] = useState('')
-  
-  // Step 3 form data (for no-slots scenario)
   const [email, setEmail] = useState('')
   const [preferredTimeWindow, setPreferredTimeWindow] = useState('')
   const [isTimeSensitive, setIsTimeSensitive] = useState(false)
@@ -54,7 +52,8 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
   }
 
   const isStep2Valid = () => {
-    return name.trim() !== '' && role !== '' && organization.trim() !== '' && linkedinUrl.trim() !== '' && sectors.trim() !== ''
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    return name.trim() !== '' && role !== '' && organization.trim() !== '' && isEmailValid && sectors.trim() !== ''
   }
 
   const isStep3Valid = () => {
@@ -86,7 +85,8 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
       case 'sectors':
         return currentStep === 2 && sectors.trim() === ''
       case 'email':
-        return currentStep === 3 && !availabilityData?.available && email.trim() === ''
+        return (currentStep === 2 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) ||
+               (currentStep === 3 && !availabilityData?.available && email.trim() === '')
       case 'preferredTimeWindow':
         return currentStep === 3 && !availabilityData?.available && preferredTimeWindow === ''
       default:
@@ -188,6 +188,27 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
     setShowValidationErrors(true);
   }
 
+  const handleEventScheduled = async (e: any) => {
+    if (e.data.payload.event.uri && submissionId) {
+      try {
+        const payload: UpdateSubmissionPayload = {
+          current_step: 3,
+          status: 'completed',
+          step_data: { calendly_event_uri: e.data.payload.event.uri }
+        };
+        await formApi.updateSubmission(submissionId, payload);
+        handleClose(); // Close modal on success
+      } catch (error) {
+        console.error('Error updating submission after Calendly booking:', error);
+        // Optionally, show an error message to the user
+      }
+    }
+  };
+
+  useCalendlyEventListener({
+    onEventScheduled: handleEventScheduled,
+  });
+
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1)
@@ -223,6 +244,15 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
     setShowWaitlistConfirmation(false)
     onClose()
   }
+
+  const widgetConfig = getWidgetConfig({
+    name,
+    email,
+    organization,
+    businessActivity,
+    sectors,
+    linkedinUrl, // Pass any other relevant data
+  });
 
   if (!isOpen) return null
   
@@ -381,6 +411,31 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                       </div>
                     </div>
 
+                    {/* Email */}
+                    <div className="flex flex-col gap-4">
+                      <div className="flex gap-1">
+                        <label className="text-base md:text-lg font-space-grotesk text-[#141414] leading-[1.2]">
+                          Work Email
+                        </label>
+                        <Image 
+                          src="/assets/query-form/required-asterisk.svg" 
+                          alt="Required" 
+                          width={6} 
+                          height={6}
+                          className="mt-0.5"
+                        />
+                      </div>
+                      <div className="relative">
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => handleFieldChange('email', e.target.value, setEmail)}
+                          placeholder="yourname@company.com"
+                          className={getFieldClassName('email')}
+                        />
+                      </div>
+                    </div>
+
                     {/* Role Selection Field */}
                     <div className="flex flex-col gap-4">
                       <div className="flex gap-1">
@@ -525,14 +580,12 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                           
                           {/* Real Calendly Widget */}
                           <div className="w-full min-h-[400px] md:min-h-[500px] border border-[#E6E6E6] rounded-lg overflow-hidden">
-                            <InlineWidget 
-                              {...getWidgetConfig({
-                                name,
-                                email: linkedinUrl, // Using LinkedIn URL as a placeholder for email
-                                businessActivity,
-                                organization,
-                                sectors
-                              })}
+                            <InlineWidget
+                              url={widgetConfig.url}
+                              styles={widgetConfig.styles}
+                              pageSettings={widgetConfig.pageSettings}
+                              prefill={widgetConfig.prefill}
+                              utm={widgetConfig.utm}
                             />
                           </div>
                         </div>
