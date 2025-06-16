@@ -7,6 +7,7 @@ import { calendlyApi, formApi, UpdateSubmissionPayload } from '../utils/api'
 import { getWidgetConfig } from '../config/calendly'
 import CountrySelector from './CountrySelector'
 import { Country } from '../data/countries'
+import CheckIcon from './CheckIcon'
 
 interface QueryFormModalProps {
   isOpen: boolean
@@ -20,6 +21,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
   const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
   const [availabilityData, setAvailabilityData] = useState<any>(null)
   const [submissionId, setSubmissionId] = useState<string | null>(null)
+  const [showWaitlistConfirmation, setShowWaitlistConfirmation] = useState(false)
   
   // Step 1 form data
   const [businessActivity, setBusinessActivity] = useState('')
@@ -171,7 +173,11 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
           };
         }
         await formApi.updateSubmission(submissionId, payload);
-        handleClose(); // Close modal on success
+        if (availabilityData?.available) {
+          handleClose(); // Or move to a different confirmation screen if needed
+        } else {
+          setShowWaitlistConfirmation(true);
+        }
       } catch (error) {
         console.error('Error on step 3 submission:', error);
       }
@@ -214,10 +220,15 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
     setEmail('')
     setPreferredTimeWindow('')
     setIsTimeSensitive(false)
+    setShowWaitlistConfirmation(false)
     onClose()
   }
 
   if (!isOpen) return null
+  
+  if (showWaitlistConfirmation) {
+    return <WaitlistConfirmation onClose={handleClose} />;
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -590,27 +601,21 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                           </div>
 
                           {/* Time Sensitive Checkbox */}
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
+                          <div className="flex items-center gap-3">
+                            <div
+                              className={`relative flex items-center justify-center w-5 h-5 border-2 rounded cursor-pointer ${
+                                isTimeSensitive ? 'bg-[#192c28] border-[#192c28]' : 'bg-white border-[#E6E6E6]'
+                              }`}
                               onClick={() => setIsTimeSensitive(!isTimeSensitive)}
-                              className="flex items-center gap-2"
                             >
-                              <div className="w-4 h-4 flex-shrink-0">
-                                <div className={`w-4 h-4 border-2 rounded-sm flex items-center justify-center ${
-                                  isTimeSensitive 
-                                    ? 'bg-[#333333] border-[#333333]' 
-                                    : 'bg-white border-[#333333]'
-                                }`}>
-                                  {isTimeSensitive && (
-                                    <div className="w-2 h-2 bg-white rounded-[1px]"></div>
-                                  )}
-                                </div>
-                              </div>
-                              <span className="text-sm font-space-grotesk text-[#141414] leading-[1.2]">
-                                Our request is time-sensitive
-                              </span>
-                            </button>
+                              {isTimeSensitive && <CheckIcon className="w-3 h-3 text-white" />}
+                            </div>
+                            <span
+                              className="text-sm font-space-grotesk text-[#333333] cursor-pointer"
+                              onClick={() => setIsTimeSensitive(!isTimeSensitive)}
+                            >
+                              Our request is time sensitive
+                            </span>
                           </div>
                         </div>
                     )}
@@ -661,4 +666,48 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
       </div>
     </div>
   )
-} 
+}
+
+const WaitlistConfirmation = ({ onClose }: { onClose: () => void }) => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+      <div className="relative w-full max-w-lg bg-[#192c28] rounded-2xl shadow-lg flex flex-col items-center text-center p-8 md:p-12 text-white">
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 z-50 w-8 h-8 flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors rounded-full"
+        >
+          <Image 
+            src="/assets/query-form/close-icon.svg" 
+            alt="Close" 
+            width={16} 
+            height={16}
+            className="filter-none invert"
+          />
+        </button>
+
+        <div className="w-16 h-16 bg-[#c4e538] rounded-full flex items-center justify-center mb-6">
+          <svg className="w-8 h-8 text-[#192c28]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        
+        <h2 className="font-instrument-serif text-3xl md:text-4xl mb-4">
+          You're on the list!
+        </h2>
+        
+        <p className="font-space-grotesk text-base text-white/80 mb-8 max-w-sm">
+          Thanks for your interest! We've received your details and will get back to you within your preferred time window.
+        </p>
+        
+        <button
+          onClick={onClose}
+          className="bg-[#c4e538] cursor-pointer h-12 relative rounded px-6 flex items-center justify-center gap-2 group transition-all hover:gap-3"
+        >
+          <span className="font-space-grotesk font-medium text-[#192c28] text-sm">
+            Got it, thanks!
+          </span>
+        </button>
+      </div>
+    </div>
+  );
+}; 
