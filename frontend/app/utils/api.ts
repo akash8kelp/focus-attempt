@@ -60,7 +60,7 @@ async function apiRequest<T>(
   options: RequestInit = {}
 ): Promise<ApiResponse<T>> {
   try {
-    const url = `${API_BASE_URL}${endpoint}`;
+    const url = `${API_BASE_URL}/api${endpoint}`;
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
@@ -90,12 +90,12 @@ async function apiRequest<T>(
 export const calendlyApi = {
   // Check availability for booking slots
   checkAvailability: async (): Promise<ApiResponse<AvailabilityData>> => {
-    return apiRequest<AvailabilityData>('/api/calendly/availability');
+    return apiRequest<AvailabilityData>('/calendly/availability');
   },
 
   // Submit to waiting list when no slots available
   submitToWaitingList: async (data: WaitingListData): Promise<ApiResponse<{ id: string; estimatedResponse: string }>> => {
-    return apiRequest('/api/calendly/waiting-list', {
+    return apiRequest('/calendly/waiting-list', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -103,7 +103,7 @@ export const calendlyApi = {
 
   // Submit complete form data
   submitForm: async (data: FormSubmissionData): Promise<ApiResponse<{ id: string }>> => {
-    return apiRequest('/api/calendly/submit-form', {
+    return apiRequest('/calendly/submit-form', {
       method: 'POST',
       body: JSON.stringify(data),
     });
@@ -113,13 +113,13 @@ export const calendlyApi = {
 // Form API functions
 export const formApi = {
   startSubmission: async (step1Data: FormSubmissionData['step1Data']): Promise<StartSubmissionApiResponse> => {
-    return apiRequest('/api/form/start', {
+    return apiRequest('/form/start', {
       method: 'POST',
       body: JSON.stringify({ step1_data: step1Data }),
     });
   },
   updateSubmission: async (id: string, payload: UpdateSubmissionPayload): Promise<ApiResponse<{ submission_id: string }>> => {
-    return apiRequest(`/api/form/${id}/update`, {
+    return apiRequest(`/form/${id}/update`, {
       method: 'PUT',
       body: JSON.stringify(payload),
     });
