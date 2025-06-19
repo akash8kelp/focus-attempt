@@ -37,7 +37,7 @@ export default function FinalCTASection({ onStartSearch }: FinalCTASectionProps)
         {/* Content */}
         <div className="w-full flex flex-col gap-6 md:gap-8 items-center text-center z-10">
           <h2 className="font-instrument-serif text-4xl md:text-5xl lg:text-6xl text-white max-w-2xl lg:max-w-4xl">
-            Let's Help You Make a <span className="italic text-[#c4e538] underline">Smarter Move</span>
+            Let's help you make a <span className="italic text-[#c4e538] underline">Smarter Move</span>
           </h2>
           <p className="font-space-grotesk text-base text-[#e6e6e6] max-w-md">
             Start with a simple brief. We'll deliver a report that helps you decide with confidence.

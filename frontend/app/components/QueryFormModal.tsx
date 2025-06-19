@@ -53,7 +53,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
 
   const isStep2Valid = () => {
     const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
-    return name.trim() !== '' && role !== '' && organization.trim() !== '' && isEmailValid && sectors.trim() !== ''
+    return name.trim() !== '' && role !== '' && organization.trim() !== '' && isEmailValid;
   }
 
   const isStep3Valid = () => {
@@ -81,9 +81,9 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
       case 'organization':
         return currentStep === 2 && organization.trim() === ''
       case 'linkedinUrl':
-        return currentStep === 2 && linkedinUrl.trim() === ''
+        return false // Now optional
       case 'sectors':
-        return currentStep === 2 && sectors.trim() === ''
+        return false // Now optional
       case 'email':
         return (currentStep === 2 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) ||
                (currentStep === 3 && !availabilityData?.available && email.trim() === '')
@@ -481,79 +481,13 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                     </div>
 
                     {/* Your Organization Field */}
-                    <div className="flex flex-col gap-4">
-                      <div className="flex gap-1">
-                        <label className="text-base md:text-lg font-space-grotesk text-[#141414] leading-[1.2]">
-                          Your Organization
-                        </label>
-                        <Image 
-                          src="/assets/query-form/required-asterisk.svg" 
-                          alt="Required" 
-                          width={6} 
-                          height={6}
-                          className="mt-0.5"
-                        />
-                      </div>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          value={organization}
-                          onChange={(e) => handleFieldChange('organization', e.target.value, setOrganization)}
-                          placeholder="Your Organization"
-                          className={getFieldClassName('organization')}
-                        />
-                      </div>
-                    </div>
-
-                    {/* LinkedIn URL Field */}
-                    <div className="flex flex-col gap-4">
-                      <div className="flex gap-1">
-                        <label className="text-base md:text-lg font-space-grotesk text-[#141414] leading-[1.2]">
-                          Drop your LinkedIn URL
-                        </label>
-                        <Image 
-                          src="/assets/query-form/required-asterisk.svg" 
-                          alt="Required" 
-                          width={6} 
-                          height={6}
-                          className="mt-0.5"
-                        />
-                      </div>
-                      <div className="relative">
-                        <input
-                          type="url"
-                          value={linkedinUrl}
-                          onChange={(e) => handleFieldChange('linkedinUrl', e.target.value, setLinkedinUrl)}
-                          placeholder="https://linkedin.com/in/yourname"
-                          className={getFieldClassName('linkedinUrl')}
-                        />
-                      </div>
-                    </div>
+                    <InputField id="organization" label="Organization" placeholder="Your company/organization" value={organization} onChange={(e) => handleFieldChange('organization', e.target.value, setOrganization)} error={hasFieldError('organization')} required />
                     
-                    {/* Sectors Field */}
-                    <div className="flex flex-col gap-4">
-                      <div className="flex gap-1">
-                        <label className="text-base md:text-lg font-space-grotesk text-[#141414] leading-[1.2]">
-                          What sectors are you most focused on?
-                        </label>
-                        <Image 
-                          src="/assets/query-form/required-asterisk.svg" 
-                          alt="Required" 
-                          width={6} 
-                          height={6}
-                          className="mt-0.5"
-                        />
-                      </div>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          value={sectors}
-                          onChange={(e) => handleFieldChange('sectors', e.target.value, setSectors)}
-                          placeholder="e.g., Healthcare, Fintech, Mobility, Defence"
-                          className={getFieldClassName('sectors')}
-                        />
-                      </div>
-                    </div>
+                    {/* LinkedIn URL */}
+                    <InputField id="linkedinUrl" label="LinkedIn Profile URL (Optional)" placeholder="linkedin.com/in/yourprofile" value={linkedinUrl} onChange={(e) => handleFieldChange('linkedinUrl', e.target.value, setLinkedinUrl)} error={hasFieldError('linkedinUrl')} />
+
+                    {/* Sectors */}
+                    <InputField id="sectors" label="What sectors are you interested in? (Optional)" placeholder="e.g., SaaS, FinTech, Healthcare" value={sectors} onChange={(e) => handleFieldChange('sectors', e.target.value, setSectors)} error={hasFieldError('sectors')} />
                   </>
               )}
               {currentStep === 3 && (
@@ -763,4 +697,67 @@ const WaitlistConfirmation = ({ onClose }: { onClose: () => void }) => {
       </div>
     </div>
   );
-}; 
+};
+
+// Reusable InputField component
+const InputField = ({ id, label, placeholder, value, onChange, error, required = false }: { id: string, label: string, placeholder: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, error: boolean, required?: boolean }) => (
+  <div className="flex flex-col gap-4">
+    <div className="flex gap-1">
+      <label htmlFor={id} className="text-base md:text-lg font-space-grotesk text-[#141414] leading-[1.2]">
+        {label}
+      </label>
+      {required && (
+        <Image 
+          src="/assets/query-form/required-asterisk.svg" 
+          alt="Required" 
+          width={6} 
+          height={6}
+          className="mt-0.5"
+        />
+      )}
+    </div>
+    <div className="relative">
+      <input
+        id={id}
+        type="text"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={`w-full h-12 px-4 py-2 border rounded text-sm font-space-grotesk text-[#666666] placeholder-[#666666] focus:outline-none leading-[1.2] ${error ? 'border-red-500 focus:border-red-500' : 'border-[#E6E6E6] focus:border-[#192C28]'}`}
+      />
+    </div>
+  </div>
+);
+
+// Reusable SelectField component
+const SelectField = ({ id, label, value, onChange, options, error, required = true }: { id: string, label: string, value: string, onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void, options: string[], error: boolean, required?: boolean }) => (
+  <div className="flex flex-col gap-4">
+    <div className="flex gap-1">
+      <label htmlFor={id} className="text-base md:text-lg font-space-grotesk text-[#141414] leading-[1.2]">
+        {label}
+      </label>
+      {required && (
+        <Image 
+          src="/assets/query-form/required-asterisk.svg" 
+          alt="Required" 
+          width={6} 
+          height={6}
+          className="mt-0.5"
+        />
+      )}
+    </div>
+    <div className="relative">
+      <select
+        id={id}
+        value={value}
+        onChange={onChange}
+        className={`w-full h-12 px-4 py-2 border rounded text-sm font-space-grotesk focus:outline-none leading-[1.2] appearance-none bg-no-repeat bg-right-4 bg-center bg-[url('/assets/query-form/dropdown-arrow.svg')] ${error ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-[#E6E6E6] focus:border-[#192C28] text-[#666666]'}`}
+      >
+        <option value="" disabled>Select an option</option>
+        {options.map(option => (
+          <option key={option} value={option}>{option}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+); 

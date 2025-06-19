@@ -19,7 +19,7 @@ const services: Service[] = [
     },
     {
       title: "Profiles that go beyond the basics",
-      description: "Products, leadership, socials, clients — everything you wish Crunchbase had.",
+      description: "Products, leadership, socials, clients — everything for a detailed company analysis.",
       videoUrl: "/assets/video2.mp4",
       darkCard: true,
     },
@@ -263,7 +263,7 @@ export default function IntelligenceServicesSection({ onStartSearch }: { onStart
           Our Intelligence Services
         </h2>
         <p className="text-[#333333] font-space-grotesk text-base font-normal leading-tight text-center max-w-xl">
-          See how leading companies have transformed their business with Pulse's market intelligence
+          See how leading companies have transformed their businesses with Pulse's market intelligence
         </p>
       </div>
 
