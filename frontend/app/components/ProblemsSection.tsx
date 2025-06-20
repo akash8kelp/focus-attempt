@@ -28,12 +28,13 @@ export default function ProblemsSection() {
   ]
 
   return (
-    <section className="relative bg-background-stats px-4 md:px-10 lg:px-20 xl:px-120 py-8 md:py-16 flex flex-col items-center gap-8 md:gap-16">
+    <section className="relative bg-background-stats px-4 md:px-10 lg:px-20 xl:px-120 py-8 md:py-16 flex flex-col items-center gap-8 md:gap-16 overflow-hidden">
       {/* Decorative SVG Element */}
-      <div className="absolute right-0 top-0 w-3/5 h-auto z-0 flex justify-end">
+      <div className="absolute top-0 right-0 w-[70vw] h-auto z-0">
         <Image
-          src="/assets/decorative-subtract.svg"
+          src="/assets/right-pattern.svg"
           alt="Decorative element"
+          layout="responsive"
           width={970.5}
           height={412}
           className="object-contain"

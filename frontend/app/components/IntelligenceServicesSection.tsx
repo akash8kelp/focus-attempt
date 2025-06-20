@@ -49,34 +49,17 @@ const services: Service[] = [
     },
 ]
 
-const Subtract = () => (
-    <div className="absolute w-3/5 right-0 top-0 scale-y-[-1]">
-        <svg
-            className="block w-full h-auto"
-            fill="none"
-            viewBox="0 0 972 414"
-        >
-            <path
-                d="M971.5 413H1V412H970.5V1H971.5V413ZM963.5 405.5H1V404.5H962.5V1H963.5V405.5ZM955.5 398H1V397H954.5V1H955.5V398ZM947.5 390.5H1V389.5H946.5V1H947.5V390.5ZM939.5 383H1V382H938.5V1H939.5V383ZM931.5 375.5H1V374.5H930.5V1H931.5V375.5ZM923.5 368H1V367H922.5V1H923.5V368ZM915.5 360.5H1V359.5H914.5V1H915.5V360.5ZM907.5 353H1V352H906.5V1H907.5V353ZM899.5 345.5H1V344.5H898.5V1H899.5V345.5ZM891.5 338H1V337H890.5V1H891.5V338ZM883.5 330.5H1V329.5H882.5V1H883.5V330.5ZM875.5 323H1V322H874.5V1H875.5V323ZM867.5 315.5H1V314.5H866.5V1H867.5V315.5ZM859.5 308H1V307H858.5V1H859.5V308ZM851.5 300.5H1V299.5H850.5V1H851.5V300.5ZM843.5 293H1V292H842.5V1H843.5V293ZM835.5 285.5H1V284.5H834.5V1H835.5V285.5ZM827.5 278H1V277H826.5V1H827.5V278Z"
-                stroke="url(#paint0_linear_388_51112)"
-                strokeDasharray="12 12"
-            />
-            <defs>
-                <linearGradient
-                gradientUnits="userSpaceOnUse"
-                id="paint0_linear_388_51112"
-                x1="486.25"
-                x2="406.995"
-                y1="689.379"
-                y2="293.235"
-                >
-                <stop offset="0.08" stopColor="#192C28" />
-                <stop offset="1" stopColor="#F8FCF7" />
-                </linearGradient>
-            </defs>
-        </svg>
+const DecorativePattern = () => (
+    <div className="absolute top-0 right-0 w-[70vw] h-auto z-0">
+        <Image
+            src="/assets/right-pattern.svg"
+            alt="Decorative pattern"
+            layout="responsive"
+            width={970.5}
+            height={412}
+        />
     </div>
-)
+);
 
 interface ServiceCardProps {
     service: Service;
@@ -251,36 +234,38 @@ export default function IntelligenceServicesSection({ onStartSearch }: { onStart
         setCurrentlyPlaying(visibleArray[nextIndex]);
     };
   return (
-    <section className="relative w-full bg-[#F8FCF7] flex flex-col items-center px-4 md:px-10 lg:px-20 xl:px-120 py-10 md:py-20 gap-10 md:gap-20">
-      <Subtract />
+    <section className="relative bg-background-stats px-4 md:px-10 lg:px-20 xl:px-120 py-8 md:py-16 flex flex-col items-center gap-8 md:gap-16 overflow-hidden">
+        <DecorativePattern />
+        <div className="w-full max-w-7xl mx-auto z-10">
+            <div className="flex flex-col items-center text-center mb-8 md:mb-16">
+                <div className="mb-4">
+                    <span className="text-[#333333] font-space-grotesk text-sm md:text-base font-normal tracking-widest uppercase">
+                        Our Intelligence Services
+                    </span>
+                </div>
+                <h2 className="text-[#141414] font-instrument-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight text-center">
+                    Our Intelligence Services
+                </h2>
+                <p className="text-[#333333] font-space-grotesk text-base font-normal leading-tight text-center max-w-xl">
+                    See how leading companies have transformed their businesses with Pulse's market intelligence
+                </p>
+            </div>
 
-      {/* Header Section */}
-      <div className="flex flex-col items-center gap-6 w-full z-10">
-        <span className="text-[#333333] font-space-grotesk text-sm md:text-base font-normal tracking-widest uppercase text-center">
-          Our Intelligence Services
-        </span>
-        <h2 className="text-[#141414] font-instrument-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight text-center">
-          Our Intelligence Services
-        </h2>
-        <p className="text-[#333333] font-space-grotesk text-base font-normal leading-tight text-center max-w-xl">
-          See how leading companies have transformed their businesses with Pulse's market intelligence
-        </p>
-      </div>
-
-      {/* Services Grid Container */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-20 gap-y-16 md:gap-y-24 w-full">
-        {services.map((service, index) => (
-            <ServiceCard 
-                key={index} 
-                service={service}
-                isMobileOrTablet={isMobileOrTablet}
-                isPlaying={currentlyPlaying === index}
-                onVisibilityChange={(isVisible) => handleVisibilityChange(index, isVisible)}
-                onVideoEnded={() => handleVideoEnded(index)}
-                onStartSearch={onStartSearch}
-            />
-        ))}
-      </div>
+            {/* Services Grid Container */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 lg:gap-x-20 gap-y-16 md:gap-y-24 w-full">
+                {services.map((service, index) => (
+                    <ServiceCard 
+                        key={index} 
+                        service={service}
+                        isMobileOrTablet={isMobileOrTablet}
+                        isPlaying={currentlyPlaying === index}
+                        onVisibilityChange={(isVisible) => handleVisibilityChange(index, isVisible)}
+                        onVideoEnded={() => handleVideoEnded(index)}
+                        onStartSearch={onStartSearch}
+                    />
+                ))}
+            </div>
+        </div>
     </section>
   )
 } 

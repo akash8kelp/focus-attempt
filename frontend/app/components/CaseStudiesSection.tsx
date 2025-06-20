@@ -1,55 +1,27 @@
 'use client'
 
 import React from 'react';
+import Image from 'next/image';
 
 const CaseStudiesSection = () => {
   return (
-    <div className="relative w-full bg-[#192c28] text-white py-20 px-4 md:px-8 lg:px-16 hidden md:block">
-      <div className="absolute inset-0 overflow-hidden">
-        <div
+    <div className="relative w-full bg-[#192c28] text-white py-20 px-4 md:px-8 lg:px-16 hidden md:block overflow-hidden">
+      <div className="absolute top-0 left-0 w-[70vw] h-auto z-0">
+        <Image
+          src="/assets/left-pattern.svg"
+          alt="Decorative pattern"
+          layout="responsive"
+          width={970.5}
+          height={412}
+        />
+      </div>
+      <div
           className="absolute w-[1248px] h-[952px] bg-[#C4E538] opacity-50 blur-[600px]"
           style={{
             left: '96px',
             top: '700px',
           }}
-        />
-        <div className="absolute flex h-[412px] items-center justify-center left-[-2.5px] top-[-1px] w-[970.5px]">
-          <div className="flex-none rotate-[180deg]">
-            <div
-              className="h-[412px] relative w-[970.5px]"
-            >
-              <div className="absolute bottom-[-0.121%] left-[-0.052%] right-[-0.052%] top-[-0.121%]">
-                <svg
-                  className="block size-full"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  viewBox="0 0 972 414"
-                >
-                  <path
-                    d="M971.5 413H1V412H970.5V1H971.5V413ZM963.5 405.5H1V404.5H962.5V1H963.5V405.5ZM955.5 398H1V397H954.5V1H955.5V398ZM947.5 390.5H1V389.5H946.5V1H947.5V390.5ZM939.5 383H1V382H938.5V1H939.5V383ZM931.5 375.5H1V374.5H930.5V1H931.5V375.5ZM923.5 368H1V367H922.5V1H923.5V368ZM915.5 360.5H1V359.5H914.5V1H915.5V360.5ZM907.5 353H1V352H906.5V1H907.5V353ZM899.5 345.5H1V344.5H898.5V1H899.5V345.5ZM891.5 338H1V337H890.5V1H891.5V338ZM883.5 330.5H1V329.5H882.5V1H883.5V330.5ZM875.5 323H1V322H874.5V1H875.5V323ZM867.5 315.5H1V314.5H866.5V1H867.5V315.5ZM859.5 308H1V307H858.5V1H859.5V308ZM851.5 300.5H1V299.5H850.5V1H851.5V300.5ZM843.5 293H1V292H842.5V1H843.5V293ZM835.5 285.5H1V284.5H834.5V1H835.5V285.5ZM827.5 278H1V277H826.5V1H827.5V278Z"
-                    stroke="url(#paint0_linear_397_51197)"
-                    strokeDasharray="12 12"
-                  />
-                  <defs>
-                    <linearGradient
-                      gradientUnits="userSpaceOnUse"
-                      id="paint0_linear_397_51197"
-                      x1="486.25"
-                      x2="406.995"
-                      y1="689.379"
-                      y2="293.235"
-                    >
-                      <stop offset="0.2" stopColor="#C4E538" />
-                      <stop offset="1" stopColor="#192C28" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      />
       <div className="flex flex-col items-center gap-16 z-10 relative">
         <div className="flex flex-col items-center gap-6 text-center">
           <div className="bg-[#21413c] rounded-[40px] px-4 py-2 inline-block">

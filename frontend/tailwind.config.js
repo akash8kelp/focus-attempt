@@ -66,6 +66,13 @@ module.exports = {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
         }
+      },
+      backgroundImage: {
+        'hero-gradient': 'linear-gradient(to bottom, rgba(9, 9, 11, 0.95) 0%, rgba(9, 9, 11, 0.2) 100%)',
+        'radial-gradient': 'radial-gradient(ellipse 80% 70% at 50% 10%, rgba(9, 9, 11, 0.93) 0%, transparent 100%)',
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       }
     },
   },

@@ -263,18 +263,6 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative w-full max-w-[1080px] h-full md:h-[800px] bg-white rounded-lg shadow-lg flex flex-col">
-        {/* Background Map */}
-        <div className="absolute inset-0 overflow-hidden hidden md:block">
-          <div 
-            className="absolute -left-[127px] top-0 w-[1333.63px] h-[840px] opacity-20"
-            style={{
-              background: 'linear-gradient(180deg, rgba(25, 44, 40, 0.04) 0%, rgba(25, 44, 40, 0) 49.52%, rgba(25, 44, 40, 0.04) 100%)'
-            }}
-          >
-            {/* World Map SVG - simplified for now, can be enhanced with actual country SVGs */}
-            <div className="absolute inset-0 bg-[url('/assets/hero/world-map-bg.svg')] bg-no-repeat bg-center opacity-50"></div>
-          </div>
-        </div>
 
         {/* Close Button */}
         <button 
@@ -368,7 +356,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                       <label className="text-sm font-medium text-[#192C28] font-space-grotesk">What business activity are you interested in?</label>
                       <input 
                         type="text"
-                        placeholder="e.g., Dental practices, SaaS, etc."
+                        placeholder="e.g., HR Software Companies, home surveillance companies, etc."
                         value={businessActivity}
                         onChange={(e) => handleFieldChange('businessActivity', e.target.value, setBusinessActivity)}
                         className={getFieldClassName('businessActivity')}
