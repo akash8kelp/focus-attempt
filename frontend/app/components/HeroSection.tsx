@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './Header'
 import Image from 'next/image'
 import CTAButtons from './CTAButtons'
 import TargetAudience from './TargetAudience'
+import ReportDialog from './ReportDialog'
 
 interface HeroSectionProps {
   onStartSearch?: () => void
 }
 
 export default function HeroSection({ onStartSearch }: HeroSectionProps) {
+  const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
+
+  const openReportDialog = () => setIsReportDialogOpen(true);
+  const closeReportDialog = () => setIsReportDialogOpen(false);
+
   return (
     <div className="relative w-full h-[88vh] bg-primary-green overflow-hidden">
       {/* World Map Background */}
@@ -40,13 +46,14 @@ export default function HeroSection({ onStartSearch }: HeroSectionProps) {
                 Access 2.7x more companies than traditional static databases—including opaque markets—through detailed, AI-powered company profiles curated by an expert-led team.
               </p>
             </div>
-            <CTAButtons onStartSearch={onStartSearch} />
+            <CTAButtons onStartSearch={onStartSearch} onDownloadReport={openReportDialog} />
           </div>
         </div>
 
         {/* Target Audience */}
         <TargetAudience />
       </div>
+      <ReportDialog isOpen={isReportDialogOpen} onClose={closeReportDialog} />
     </div>
   )
 } 

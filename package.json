@@ -17,5 +17,8 @@
   "devDependencies": {
     "@types/react-scroll": "^1.8.10",
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "react-intersection-observer": "^9.16.0"
   }
 }

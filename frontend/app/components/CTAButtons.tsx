@@ -2,9 +2,10 @@ import React from 'react'
 
 interface CTAButtonsProps {
   onStartSearch?: () => void
+  onDownloadReport?: () => void
 }
 
-export default function CTAButtons({ onStartSearch }: CTAButtonsProps) {
+export default function CTAButtons({ onStartSearch, onDownloadReport }: CTAButtonsProps) {
   return (
     <div className="flex flex-col sm:flex-row items-center gap-4">
       {/* Primary CTA Button */}
@@ -38,10 +39,10 @@ export default function CTAButtons({ onStartSearch }: CTAButtonsProps) {
       </button>
 
       {/* Secondary CTA Button */}
-      <button className="flex items-center justify-center w-full sm:w-auto h-12 px-6 py-2 bg-white bg-opacity-10 rounded text-white
+      <button onClick={onDownloadReport} className="flex items-center justify-center w-full sm:w-auto h-12 px-6 py-2 bg-white bg-opacity-10 rounded text-white
                          hover:bg-opacity-20 active:bg-opacity-25 transition-all duration-300">
         <span className="font-space-grotesk text-base font-medium">
-          Download Sample Report
+          Download Sample Reports
         </span>
       </button>
     </div>

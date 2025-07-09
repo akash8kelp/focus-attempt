@@ -1,5 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useInView } from 'react-intersection-observer';
+
+const CountUp = ({ end }: { end: number }) => {
+  const [count, setCount] = useState(0);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      let start = 0;
+      const duration = 500;
+      const frameRate = 30;
+      const totalFrames = duration / (1000 / frameRate);
+      const increment = end / totalFrames;
+
+      const counter = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          setCount(end);
+          clearInterval(counter);
+        } else {
+          setCount(Math.ceil(start));
+        }
+      }, 1000 / frameRate);
+
+      return () => clearInterval(counter);
+    }
+  }, [inView, end]);
+
+  return <span ref={ref}>{count}</span>;
+}
 
 export default function SocialProof() {
   const stats = [
@@ -83,17 +116,22 @@ export default function SocialProof() {
       </div>
 
       {/* Statistics Section */}
-      <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center lg:justify-between gap-8 bg-background-stats rounded-lg p-8 lg:px-24 xl:px-32">
-        {stats.map((stat, index) => (
-          <div key={index} className="flex flex-col items-center text-center gap-2">
-            <span className="font-instrument-serif text-stats leading-stats text-gray-900">
-              {stat.value}
-            </span>
-            <span className="font-space-grotesk text-nav leading-button uppercase text-gray-600">
-              {stat.label}
-            </span>
-          </div>
-        ))}
+      <div className="flex flex-col md:flex-row md:flex-wrap items-center justify-center lg:justify-between gap-8 p-8 lg:px-24 xl:px-32">
+        {stats.map((stat, index) => {
+          const numericValue = parseInt(stat.value.replace(/[^0-9]/g, ''));
+          const suffix = stat.value.replace(/[0-9]/g, '');
+          
+          return (
+            <div key={index} className="flex flex-col items-center text-center gap-2">
+              <span className="font-instrument-serif text-stats leading-stats text-gray-900">
+                {isNaN(numericValue) ? stat.value : <><CountUp end={numericValue} />{suffix}</>}
+              </span>
+              <span className="font-space-grotesk text-nav leading-button uppercase text-gray-600">
+                {stat.label}
+              </span>
+            </div>
+          )
+        })}
       </div>
     </section>
   )

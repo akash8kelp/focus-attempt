@@ -10,57 +10,53 @@ interface Step {
     bottomElement: React.ReactNode;
 }
 
+const Illustration = ({ src }: { src: string }) => (
+    <div className="absolute bottom-0 left-0 w-full h-2/3">
+        <Image 
+            src={src}
+            alt="Step illustration"
+            layout="fill"
+            objectFit="contain"
+            className="rounded-b-lg"
+        />
+    </div>
+);
+
 const steps: Step[] = [
     {
       number: "1",
       title: "Tell Us what you are looking for",
       description: "— Submit your business search and book a quick intro call.",
       cardBg: "bg-[#192c28]",
-      bottomElement: <div className="absolute bg-[#21413c] h-[200px] left-10 right-10 rounded-t-lg top-60" />
+      bottomElement: <Illustration src="/assets/step 1.png" />
     },
     {
       number: "2", 
       title: "Meet our Sector Expert",
       description: "— We discuss your needs to fully understand the ask.",
       cardBg: "bg-[#192c28]",
-      bottomElement: <div className="absolute bg-[#21413c] h-[360px] left-10 right-10 rounded-t-lg top-60" />
+      bottomElement: <Illustration src="/assets/step 2.png" />
     },
     {
       number: "3",
       title: "You receive scope & pricing by email",
       description: "— just 15% upfront to start.",
       cardBg: "bg-[#192c28]",
-      bottomElement: <div className="absolute bg-[#21413c] h-[360px] left-10 right-10 rounded-t-lg top-60" />
+      bottomElement: <Illustration src="/assets/step 3.png" />
     },
     {
       number: "4",
       title: "Our sector experts deliver in 4 days — fast, accurate, and curated.",
       description: "You get platform access with login credentials in your email.",
       cardBg: "bg-[#192c28]",
-      bottomElement: <div className="absolute bg-[#21413c] h-[171px] left-10 right-[41px] rounded-t-lg top-[269px]" />
+      bottomElement: <Illustration src="/assets/step 4.png" />
     },
     {
       number: "5",
       title: "Review the list, pay the rest",
       description: "— we'll send the final invoice.",
       cardBg: "bg-[#192c28]",
-      bottomElement: (
-        <div className="absolute h-[264.828px] left-10 right-10 top-[175.172px]">
-            <div className="absolute bottom-0 left-0 right-0 top-[0.263%]">
-            <svg
-                className="block size-full"
-                fill="none"
-                preserveAspectRatio="none"
-                viewBox="0 0 1120 265"
-            >
-                <path
-                d="M0 101.186C0 97.0267 3.1873 93.5612 7.33214 93.214L1111.33 0.726033C1116 0.33519 1120 4.01639 1120 8.6981V264.828H0V101.186Z"
-                fill="#21413C"
-                />
-            </svg>
-            </div>
-        </div>
-      )
+      bottomElement: <Illustration src="/assets/step 5.png" />
     }
 ];
 
@@ -76,11 +72,11 @@ const CardPattern = () => (
     </div>
 );
 
-const StepCard = ({ step }: { step: Step }) => (
+const StepCard = ({ step, isFifth = false }: { step: Step, isFifth?: boolean }) => (
     <div
-      className={`${step.cardBg} relative rounded-lg shrink-0 w-full overflow-clip min-h-[440px]`}
+      className={`${step.cardBg} relative rounded-lg shrink-0 w-full overflow-hidden flex flex-col`}
     >
-        <div className="box-border content-stretch flex flex-col gap-10 items-start justify-start p-6 md:p-10 relative w-full h-full">
+        <div className="box-border content-stretch flex flex-col gap-10 items-start justify-start p-6 md:p-10 relative w-full flex-grow">
             <CardPattern />
             <div className="bg-[#c4e538] relative rounded-full shrink-0 p-2 flex items-center justify-center size-10">
                 <p className="font-space-grotesk font-bold leading-[1.2] text-lg text-[#192c28]">
@@ -97,9 +93,9 @@ const StepCard = ({ step }: { step: Step }) => (
                     </p>
                 </div>
             </div>
-            <div className="z-0 mt-auto">
-                {step.bottomElement}
-            </div>
+        </div>
+        <div className={`relative w-full ${isFifth ? 'aspect-[3.5/1]' : 'aspect-[2.1/1]'}`}>
+            {step.bottomElement}
         </div>
     </div>
   );
@@ -133,13 +129,13 @@ export default function ProcessSection() {
             </div>
           </div>
           
-          <div className="relative w-full z-10 flex flex-col gap-6">
+          <div className="relative w-2/3 mx-auto z-10 flex flex-col gap-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {steps.slice(0, 4).map((step, index) => (
                 <StepCard key={index} step={step} />
               ))}
             </div>
-            <StepCard step={steps[4]} />
+            <StepCard step={steps[4]} isFifth={true} />
           </div>
         </div>
     </section>
