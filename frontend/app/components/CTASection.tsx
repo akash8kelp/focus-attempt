@@ -2,77 +2,54 @@
 
 import Image from 'next/image'
 
-const DecorativePattern = () => (
-    <div className="absolute top-0 left-0 w-[70vw] h-auto z-0">
-        <Image
-            src="/assets/left-pattern.svg"
-            alt="Decorative pattern"
-            layout="responsive"
-            width={970.5}
-            height={412}
-        />
-    </div>
-);
-
 interface CTASectionProps {
   onStartSearch?: () => void
 }
 
 export default function CTASection({ onStartSearch }: CTASectionProps) {
   return (
-    <section className="relative w-full bg-[#192C28] flex items-center px-4 sm:px-8 md:px-16 lg:px-24 py-16 md:py-20 overflow-hidden">
-        <DecorativePattern />
-        {/* Background blur */}
-        <div 
-            className="absolute w-[1248px] h-[952px] bg-[#C4E538] opacity-30 blur-[400px]"
-            style={{ left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+    <section className="relative w-full bg-[#1A2C28] pt-20 px-4 sm:px-8 md:px-16 lg:px-[120px] overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute top-0 left-0 w-3/4 h-auto z-0">
+        <Image
+          src="/assets/left-pattern.svg"
+          alt="Background"
+          layout="responsive"
+          width={971}
+          height={412}
         />
+      </div>
 
       {/* Content Container */}
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-16 w-full z-10">
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-16">
         {/* Left Content */}
-        <div className="flex flex-col gap-8 md:gap-10 items-center lg:items-start w-full lg:w-auto max-w-xl text-center lg:text-left">
-          {/* Text Content */}
-          <div className="flex flex-col gap-4 w-full">
-            <h2 className="text-white font-instrument-serif text-4xl sm:text-5xl md:text-6xl font-normal leading-tight">
-              Stop Guessing.<br />Start Screening.
-            </h2>
-            <p className="text-[#E6E6E6] font-space-grotesk text-base font-normal leading-relaxed">
-              Get a free sample of a real Pulse company report. See how we break down business models, risk signals, and growth insights — in a format built for fast decision-making.
-            </p>
-          </div>
-
-          {/* CTA Button */}
+        <div className="flex flex-col gap-8 text-center md:text-left items-center md:items-start max-w-lg">
+          <h2 className="text-4xl md:text-5xl font-bold text-white font-instrument-serif">
+            Stop Guessing,
+            <br />
+            Start Screening.
+          </h2>
+          <p className="text-base text-gray-300">
+            Get a free sample of a real Pulse company report. See how we break down business models, risk signals, and growth insights — in a format built for fast decision-making.
+          </p>
           <button 
             onClick={onStartSearch}
-            className="flex items-center gap-2 h-12 hover:opacity-80 transition-opacity"
+            className="bg-[#C4E538] text-black font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors"
           >
-            <span className="text-[#C4E538] font-space-grotesk text-sm font-bold">
-              Start your Search
-            </span>
-            <div className="w-4 h-4 flex items-center justify-center">
-              <Image
-                src="/assets/cta-arrow-icon.svg"
-                alt="Arrow"
-                width={13.33}
-                height={10.67}
-              />
-            </div>
+            Get Started
           </button>
         </div>
 
-        {/* Right Mockup */}
-        <div className="relative w-full max-w-sm h-80 lg:w-[450px] lg:h-[400px] flex-shrink-0 bg-[#21413C] rounded-lg">
-          <div className="absolute w-full h-full flex items-center justify-center">
-              <div
-                className="absolute bg-[#e1f0df] h-[90%] w-[70%] opacity-80 rounded-lg shadow-lg"
-                style={{ transform: 'rotate(-7.92deg)' }}
-              />
-              <div
-                className="absolute bg-[#e1f0df] h-[90%] w-[70%] rounded-lg shadow-lg"
-                style={{ transform: 'rotate(7.07deg)' }}
-              />
-          </div>
+        {/* Right Image */}
+        <div className="w-full md:w-1/2 md:self-end">
+          <Image
+            src="/assets/report-visual.png"
+            alt="Report Visual"
+            width={600}
+            height={400}
+            layout="responsive"
+            objectFit="contain"
+          />
         </div>
       </div>
     </section>

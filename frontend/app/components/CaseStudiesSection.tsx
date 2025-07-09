@@ -76,7 +76,7 @@ const CaseStudiesSection = () => {
               </svg>
             </div>
 
-            <div className="flex flex-col gap-4 flex-shrink-0">
+            <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
               <InfoCard icon={<DataVisIcon />} text="Smart data aggregation" />
               <InfoCard icon={<LogicalPartitionIcon />} text="AI logic filters" />
               <InfoCard icon={<GraphBarIncreaseIcon />} text="Proxy model: dental chair count" />
@@ -113,7 +113,7 @@ const CaseStudiesSection = () => {
               </svg>
             </div>
 
-            <div className="flex flex-col gap-4 flex-shrink-0">
+            <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
               <InfoCard icon={<CallIcon />} text="Selective cold calling" />
               <InfoCard icon={<MapIcon />} text="3D Map Validation" />
               <div className="bg-[#c4e538] text-black border border-[#192c28] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-44 shadow-lg">
