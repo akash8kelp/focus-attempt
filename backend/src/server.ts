@@ -37,10 +37,12 @@ app.get('/health', (req, res) => {
 // Import routes
 import formRoutes from './routes/form'
 import calendlyRoutes from './routes/calendly'
+import mailRoutes from './routes/mail'
 
 // API routes
 app.use('/api/form', formRoutes)
 app.use('/api/calendly', calendlyRoutes)
+app.use('/api', mailRoutes)
 
 app.get('/api/companies', (req, res) => {
   // This will be expanded later for company data
