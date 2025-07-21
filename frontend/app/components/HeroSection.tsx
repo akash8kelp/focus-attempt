@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import Header from './Header'
 import Image from 'next/image'
 import CTAButtons from './CTAButtons'
@@ -6,11 +6,34 @@ import TargetAudience from './TargetAudience'
 import ReportDialog from './ReportDialog'
 
 interface HeroSectionProps {
-  onStartSearch?: () => void
+  onStartSearch?: () => void;
+  blur?: number; // Blur in pixels
+  brightnessTop?: number; // Brightness at the top (0 to 1)
+  brightnessBottom?: number; // Brightness at the bottom (0 to 1)
 }
 
-export default function HeroSection({ onStartSearch }: HeroSectionProps) {
+export default function HeroSection({ onStartSearch, blur: targetBlur = 9, brightnessTop = 0.5, brightnessBottom = 0.15 }: HeroSectionProps) {
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
+  const [currentBlur, setCurrentBlur] = useState(0);
+
+  useEffect(() => {
+    const animationDuration = 2000; // 2 seconds
+    const startTime = Date.now();
+
+    const animateBlur = () => {
+      const elapsedTime = Date.now() - startTime;
+      const progress = Math.min(elapsedTime / animationDuration, 1);
+      const newBlur = progress * targetBlur;
+      
+      setCurrentBlur(newBlur);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateBlur);
+      }
+    };
+
+    requestAnimationFrame(animateBlur);
+  }, [targetBlur]);
 
   const openReportDialog = () => setIsReportDialogOpen(true);
   const closeReportDialog = () => setIsReportDialogOpen(false);
@@ -25,7 +48,14 @@ export default function HeroSection({ onStartSearch }: HeroSectionProps) {
           backgroundRepeat: 'no-repeat',
         }}
       />
-      <div className="absolute inset-0 z-10 bg-hero-gradient" />
+      <div 
+        className="absolute inset-0 z-10"
+        style={{
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, ${brightnessTop}), rgba(0, 0, 0, ${brightnessBottom}))`,
+          backdropFilter: `blur(${currentBlur}px)`,
+          transition: 'backdrop-filter 2s ease-out',
+        }}
+      />
 
       {/* Blur Effect - constrained within hero section */}
       <div className="absolute top-[415px] left-[96px] w-[1248px] h-[500px] bg-primary-lime rounded-full opacity-50 blur-[600px]" />

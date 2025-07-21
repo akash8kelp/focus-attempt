@@ -23,15 +23,15 @@ export default function CTASection({ onStartSearch }: CTASectionProps) {
       {/* Content Container */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-16">
         {/* Left Content */}
-        <div className="flex flex-col gap-8 text-center md:text-left items-center md:items-start max-w-lg">
+        <div className="flex flex-col gap-8 text-center md:text-left items-center md:items-start max-w-lg md:pl-36">
           <h2 className="text-4xl md:text-5xl font-bold text-white font-instrument-serif">
             Stop Guessing,
             <br />
             Start Screening.
-          </h2>
+            </h2>
           <p className="text-base text-gray-300">
-            Get a free sample of a real Pulse company report. See how we break down business models, risk signals, and growth insights — in a format built for fast decision-making.
-          </p>
+              Get a free sample of a real Pulse company report. See how we break down business models, risk signals, and growth insights — in a format built for fast decision-making.
+            </p>
           <button 
             onClick={onStartSearch}
             className="bg-[#C4E538] text-black font-bold py-3 px-6 rounded-md hover:bg-opacity-90 transition-colors"

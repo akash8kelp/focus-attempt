@@ -1,196 +1,12 @@
 'use client'
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
-const CaseStudiesSection = () => {
-  return (
-    <div className="relative w-full bg-[#192c28] text-white py-20 px-4 md:px-8 lg:px-16 hidden md:block overflow-hidden">
-      <div className="absolute top-0 left-0 w-[70vw] h-auto z-0">
-        <Image
-          src="/assets/left-pattern.svg"
-          alt="Decorative pattern"
-          layout="responsive"
-          width={970.5}
-          height={412}
-        />
-      </div>
-      <div
-          className="absolute w-[1248px] h-[952px] bg-[#C4E538] opacity-50 blur-[600px]"
-          style={{
-            left: '96px',
-            top: '700px',
-          }}
-      />
-      <div className="flex flex-col items-center gap-16 z-10 relative">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <div className="bg-[#21413c] rounded-[40px] px-4 py-2 inline-block">
-            <span className="font-space-grotesk text-base uppercase tracking-wider">
-              Case Study 1
-            </span>
-          </div>
-          <h2 className="font-instrument-serif text-4xl md:text-5xl lg:text-6xl max-w-4xl">
-            Smart M&A Targeting for United Clinics — Poland's Dental Market
-          </h2>
-        </div>
-
-        <div className="w-full overflow-x-auto [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none' }}>
-          <div className="flex items-center justify-start lg:justify-center gap-4 min-w-[1200px] px-4">
-            {/* Card 1 */}
-            <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
-              <h3 className="font-space-grotesk text-2xl font-medium text-[#c4e538] uppercase">
-                22,000+ Clinics Identified
-              </h3>
-              <p className="font-space-grotesk text-lg">
-                Web scraping + registry mining
-              </p>
-            </div>
-
-            <div className="h-full relative shrink-0 w-[72px]">
-              <svg
-                className="block size-full"
-                fill="none"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 72 435"
-              >
-                <g>
-                  <path
-                    d="M72 28.0005H50.3945C42.6629 28.0007 36.3948 34.2688 36.3945 42.0005V164.42C39.6945 160.342 44.7396 157.733 50.3945 157.733H72V161.733H50.3945C42.6629 161.733 36.3948 168.001 36.3945 175.733V201.415C36.3945 208.381 32.4356 214.423 26.6455 217.415C32.4357 220.406 36.3944 226.448 36.3945 233.415V259.096C36.3945 266.828 42.6627 273.096 50.3945 273.096H72V277.096H50.3945C44.7394 277.096 39.6944 274.488 36.3945 270.409V393C36.3945 400.731 42.6627 406.999 50.3945 407H72V411H50.3945C40.4536 410.999 32.3945 402.941 32.3945 393V233.415C32.3943 225.804 26.3207 219.611 18.7559 219.419L18.3945 219.415H0V215.415H18.3945L18.7559 215.411C26.3209 215.219 32.3945 209.026 32.3945 201.415V42.0005C32.3948 32.0597 40.4537 24.0007 50.3945 24.0005H72V28.0005Z"
-                    fill="url(#paint1_linear_397_51212)"
-                  />
-                </g>
-                <defs>
-                  <linearGradient
-                    id="paint1_linear_397_51212"
-                    x1="72"
-                    x2="0"
-                    y1="217.5"
-                    y2="217.5"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#192C28" />
-                    <stop offset="0.8" stopColor="#C4E538" />
-                    <stop offset="1" stopColor="#192C28" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
-              <InfoCard icon={<DataVisIcon />} text="Smart data aggregation" />
-              <InfoCard icon={<LogicalPartitionIcon />} text="AI logic filters" />
-              <InfoCard icon={<GraphBarIncreaseIcon />} text="Proxy model: dental chair count" />
-              <InfoCard icon={<GeoFenceIcon />} text="Geo + demand overlays" />
-            </div>
-
-            <div className="h-full relative shrink-0 w-[74.012px]">
-              <svg
-                className="block size-full"
-                fill="none"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 75 435"
-              >
-                <g>
-                  <path
-                    d="M74.0098 28H38.4062V150.64C38.4062 152.582 38.7994 153.869 39.3555 154.752C39.9026 155.62 40.7146 156.268 41.8672 156.752C44.3229 157.784 47.8942 157.925 52.4062 157.925H74.0117V161.925H52.4062C48.0817 161.925 43.6525 161.841 40.3174 160.439C39.6423 160.156 38.9996 159.813 38.4023 159.401V201.331H38.6172V259.105C38.6172 260.053 38.5436 260.984 38.4023 261.893V393C38.4021 402.941 30.3433 411 20.4023 411H0.0078125V407H20.4023C28.1342 407 34.4021 400.732 34.4023 393V270.678C31.1004 274.607 26.1511 277.105 20.6172 277.105H0.0117188V273.105H20.6172C27.5118 273.105 33.242 268.121 34.4023 261.56V128.571H34.4062V28H0V24H74.0098V28Z"
-                    fill="url(#paint2_linear_397_51151)"
-                  />
-                </g>
-                <defs>
-                  <linearGradient
-                    id="paint2_linear_397_51151"
-                    x1="73.0379"
-                    x2="0"
-                    y1="217.5"
-                    y2="217.5"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#192C28" />
-                    <stop offset="0.8" stopColor="#C4E538" />
-                    <stop offset="1" stopColor="#192C28" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-
-            <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
-              <InfoCard icon={<CallIcon />} text="Selective cold calling" />
-              <InfoCard icon={<MapIcon />} text="3D Map Validation" />
-              <div className="bg-[#c4e538] text-black border border-[#192c28] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-44 shadow-lg">
-                <p className="font-space-grotesk text-lg text-[#333333]">Delivered in</p>
-                <h3 className="font-space-grotesk text-2xl font-medium text-[#141414] uppercase">
-                  900 Validated Targets
-                </h3>
-              </div>
-            </div>
-
-            <div className="h-full relative shrink-0">
-              <div className="relative size-full">
-                <div className="box-border content-stretch flex flex-row gap-2 h-full items-start justify-start px-0 py-8 relative">
-                  <div className="h-[126.047px] relative shrink-0 w-[83.547px]">
-                    <svg
-                      className="block size-full"
-                      fill="none"
-                      preserveAspectRatio="none"
-                      viewBox="0 0 84 127"
-                    >
-                      <path
-                        d="M83.5469 11.5469L72 23.0938L62.4531 13.5469H36.3955V20.9561C36.3955 27.697 36.3946 37.012 36.3945 47.3066C36.3944 67.8964 36.3946 92.407 36.3945 108.091C36.3944 118.039 28.3284 126.047 18.3945 126.047H0V122.047H18.3945C26.1337 122.047 32.3944 115.816 32.3945 108.091C32.3946 92.407 32.3944 67.8964 32.3945 47.3066C32.3946 37.012 32.3955 27.697 32.3955 20.9561V13.5469H0V9.54688H62.4531L72 0L83.5469 11.5469Z"
-                        fill="url(#paint3_linear_397_51181)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint3_linear_397_51181"
-                          x1="83.5469"
-                          x2="0"
-                          y1="63.0234"
-                          y2="63.0234"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop offset="0.0001" stopColor="#C4E538" />
-                          <stop offset="1" stopColor="#192C28" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
-              <h3 className="font-space-grotesk text-2xl font-medium text-[#c4e538] uppercase">
-                2 Acquisitions closed in 30 days
-              </h3>
-              <p className="font-space-grotesk text-lg">
-                10x faster than Traditional Consulting
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <div className="flex flex-row gap-6 items-center justify-center mt-10 lg:hidden">
-          <button className="bg-[#21413c] opacity-40 rounded-full p-4">
-            <LeftArrowIcon />
-          </button>
-          <button className="bg-[#21413c] rounded-full p-4">
-            <RightArrowIcon />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const InfoCard = ({ icon, text }: { icon: React.ReactNode, text: string }) => (
-  <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex items-center gap-4 w-64 h-20 shadow-lg">
-    <div className="relative shrink-0 size-8">{icon}</div>
-    <span className="font-space-grotesk text-lg leading-tight">{text}</span>
-  </div>
-);
-
+// Icon components
 const DataVisIcon = () => (
   <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
-    <path d="M26 21.9911C25.2879 21.9951 24.5901 22.1909 23.98 22.5579L20.167 18.7456C20.7103 17.9306 21.0001 16.9731 21.0001 15.9938C21.0001 15.0145 20.7103 14.057 20.167 13.242L22.714 10.6961C23.3583 11.0064 24.0917 11.0786 24.7842 10.9001C25.4767 10.7216 26.0836 10.3038 26.4975 9.72087C26.9113 9.13789 27.1054 8.42731 27.0453 7.715C26.9852 7.00269 26.6748 6.33462 26.1691 5.82916C25.6635 5.32369 24.9951 5.01344 24.2825 4.95337C23.5698 4.89331 22.8589 5.0873 22.2757 5.50098C21.6925 5.91466 21.2745 6.52133 21.096 7.21352C20.9174 7.90571 20.9897 8.63875 21.3 9.28277L18.753 11.8286C17.9376 11.2856 16.9798 10.9959 16 10.9959C15.0202 10.9959 14.0624 11.2856 13.247 11.8286L9.433 8.01633C9.80001 7.40678 9.99587 6.70964 10 5.99823C10 5.20745 9.7654 4.43444 9.32588 3.77693C8.88635 3.11943 8.26164 2.60696 7.53073 2.30435C6.79983 2.00173 5.99556 1.92255 5.21964 2.07683C4.44372 2.2311 3.73098 2.61189 3.17157 3.17105C2.61216 3.73022 2.2312 4.44263 2.07686 5.21821C1.92252 5.99379 2.00173 6.7977 2.30448 7.52828C2.60723 8.25886 3.11992 8.8833 3.77772 9.32263C4.43552 9.76196 5.20888 9.99645 6 9.99645C6.71207 9.99251 7.40989 9.79672 8.02 9.4297L11.833 13.242C11.2897 14.057 10.9999 15.0145 10.9999 15.9938C10.9999 16.9731 11.2897 17.9306 11.833 18.7456L8.019 22.5579C7.40918 22.191 6.71173 21.9953 6 21.9911C5.20888 21.9911 4.43552 22.2256 3.77772 22.665C3.11992 23.1043 2.60723 23.7287 2.30448 24.4593C2.00173 25.1899 1.92252 25.9938 2.07686 26.7694C2.2312 27.5449 2.61216 28.2574 3.17157 28.8165C3.73098 29.3757 4.44372 29.7565 5.21964 29.9108C5.99556 30.065 6.79983 29.9858 7.53073 29.6832C8.26164 29.3806 8.88635 28.8682 9.32588 28.2106C9.7654 27.5531 10 26.7801 10 25.9894C9.99605 25.2776 9.80018 24.5801 9.433 23.9702L13.247 20.1589C13.7792 20.5126 14.3743 20.7609 15 20.8906V24.1742C14.3328 24.4099 13.7704 24.8739 13.4124 25.4841C13.0543 26.0942 12.9235 26.8112 13.0432 27.5084C13.1629 28.2056 13.5253 28.8381 14.0663 29.294C14.6074 29.7499 15.2923 30 16 30C16.7077 30 17.3926 29.7499 17.9337 29.294C18.4747 28.8381 18.8371 28.2056 18.9568 27.5084C19.0765 26.8112 18.9457 26.0942 18.5876 25.4841C18.2296 24.8739 17.6672 24.4099 17 24.1742V20.8906C17.6257 20.7609 18.2208 20.5126 18.753 20.1589L22.567 23.9712C22.2 24.5808 22.0041 25.2779 22 25.9894C22 26.7801 22.2346 27.5531 22.6741 28.2106C23.1136 28.8682 23.7384 29.3806 24.4693 29.6832C25.2002 29.9858 26.0044 30.065 26.7804 29.9108C27.5563 29.7565 28.269 29.3757 28.8284 28.8165C29.3878 28.2574 29.7688 27.5449 29.9231 26.7694C30.0775 25.9938 29.9983 25.1899 29.6955 24.4593C29.3928 23.7287 28.8801 23.1043 28.2223 22.665C27.5645 22.2256 26.7911 21.9911 26 21.9911ZM16 12.9951C16.5933 12.9951 17.1734 13.171 17.6667 13.5005C18.1601 13.83 18.5446 14.2983 18.7716 14.8462C18.9987 15.3942 19.0581 15.9971 18.9424 16.5788C18.8266 17.1605 18.5409 17.6948 18.1213 18.1142C17.7018 18.5335 17.1672 18.8191 16.5853 18.9348C16.0033 19.0505 15.4001 18.9912 14.852 18.7642C14.3038 18.5372 13.8352 18.1529 13.5056 17.6598C13.1759 17.1666 13 16.5869 13 15.9938C13.0008 15.1987 13.3171 14.4365 13.8796 13.8743C14.442 13.3121 15.2046 12.9959 16 12.9951ZM4 5.99823C4 5.60284 4.1173 5.21633 4.33706 4.88758C4.55683 4.55883 4.86918 4.3026 5.23463 4.15129C5.60009 3.99998 6.00222 3.96039 6.39018 4.03753C6.77814 4.11466 7.13451 4.30506 7.41421 4.58464C7.69392 4.86422 7.8844 5.22043 7.96157 5.60822C8.03874 5.99601 7.99914 6.39796 7.84776 6.76325C7.69639 7.12854 7.44004 7.44076 7.11114 7.66043C6.78224 7.88009 6.39556 7.99734 6 7.99734C5.46957 7.99734 4.96086 7.78672 4.58579 7.41181C4.21072 7.03691 4 6.52842 4 5.99823ZM6 27.9885C5.60444 27.9885 5.21776 27.8712 4.88886 27.6516C4.55996 27.4319 4.30362 27.1197 4.15224 26.7544C4.00087 26.3891 3.96126 25.9871 4.03843 25.5993C4.1156 25.2116 4.30608 24.8553 4.58579 24.5758C4.86549 24.2962 5.22186 24.1058 5.60982 24.0287C5.99778 23.9515 6.39992 23.9911 6.76537 24.1424C7.13082 24.2937 7.44318 24.55 7.66294 24.8787C7.8827 25.2075 8 25.594 8 25.9894C8 26.5196 7.78929 27.028 7.41421 27.4029C7.03914 27.7778 6.53043 27.9885 6 27.9885Z" fill="#C4E538" />
+    <path d="M26 21.9911C25.2879 21.9951 24.5901 22.1909 23.98 22.5579L20.167 18.7456C20.7103 17.9306 21.0001 16.9731 21.0001 15.9938C21.0001 15.0145 20.7103 14.057 20.167 13.242L22.714 10.6961C23.3583 11.0064 24.0917 11.0786 24.7842 10.9001C25.4767 10.7216 26.0836 10.3038 26.4975 9.72087C26.9113 9.13789 27.1054 8.42731 27.0453 7.715C26.9852 7.00269 26.6748 6.33462 26.1691 5.82916C25.6635 5.32369 24.9951 5.01344 24.2825 4.95337C23.5698 4.89331 22.8589 5.0873 22.2757 5.50098C21.6925 5.91466 21.2745 6.52133 21.096 7.21352C20.9174 7.90571 20.9897 8.63875 21.3 9.28277L18.753 11.8286C17.9376 11.2856 16.9798 10.9959 16 10.9959C15.0202 10.9959 14.0624 11.2856 13.247 11.8286L9.433 8.01633C9.80001 7.40678 9.99587 6.70964 10 5.99823C10 5.20745 9.7654 4.43444 9.32588 3.77693C8.88635 3.11943 8.26164 2.60696 7.53073 2.30435C6.79983 2.00173 5.99556 1.92255 5.21964 2.07683C4.44372 2.2311 3.73098 2.61189 3.17157 3.17105C2.61216 3.73022 2.2312 4.44263 2.07686 5.21821C1.92252 5.99379 2.00173 6.7977 2.30448 7.52828C2.60723 8.25886 3.11992 8.8833 3.77772 9.32263C4.43552 9.76196 5.20888 9.99645 6 9.99645C6.71207 9.99251 7.40989 9.79672 8.02 9.4297L11.833 13.242C11.2897 14.057 10.9999 15.0145 10.9999 15.9938C10.9999 16.9731 11.2897 17.9306 11.833 18.7456L8.019 22.5579C7.40918 22.191 6.71173 21.9953 6 21.9911C5.20888 21.9911 4.43552 22.2256 3.77772 22.665C3.11992 23.1043 2.60723 23.7287 2.30448 24.4593C2.00173 25.1899 1.92252 25.9938 2.07686 26.7694C2.2312 27.5449 2.61216 28.2574 3.17157 28.8165C3.73098 29.3757 4.44372 29.7565 5.21964 29.9108C5.99556 30.065 6.79983 29.9858 7.53073 29.6832C8.26164 29.3806 8.88635 28.8682 9.32588 28.2106C9.7654 27.5531 10 26.7801 10 25.9894C9.99605 25.2776 9.80018 24.5801 9.433 23.9702L13.247 20.1589C13.7792 20.5126 14.3743 20.7609 15 20.8906V24.1742C14.3328 24.4099 13.7704 24.8739 13.4124 25.4841C13.0543 26.0942 12.9235 26.8112 13.0432 27.5084C13.1629 28.2056 13.5253 28.8381 14.0663 29.294C14.6074 29.7499 15.2923 30 16 30C16.7077 30 17.3926 29.7499 17.9337 29.294C18.4747 28.8381 18.8371 28.2056 18.9568 27.5084C19.0765 26.8112 18.9457 26.0942 18.5876 25.4841C18.2296 24.8739 17.6672 24.4099 17 24.1742V20.8906C17.6257 20.7609 18.2208 20.5126 18.753 20.1589L22.567 23.9712C22.2 24.5808 22.0041 25.2779 22 25.9894C22 26.7801 22.2346 27.5531 22.6741 28.2106C23.1136 28.8682 23.7384 29.3806 24.4693 29.6832C25.2002 29.9858 26.0044 30.065 26.7804 29.9108C27.5563 29.7565 28.269 29.3757 28.8284 28.8165C29.3878 28.2574 29.7688 27.5449 29.9231 26.7694C30.0775 25.9938 29.9983 25.1899 29.6955 24.4593C29.3928 23.7287 28.8801 23.1043 28.2223 22.665C27.5645 22.2256 26.7911 21.9911 26 21.9911Z" fill="#C4E538" />
   </svg>
 );
 
@@ -209,13 +25,13 @@ const GraphBarIncreaseIcon = () => (
 
 const GeoFenceIcon = () => (
   <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
-    <path d="M16 2C14.2863 2 12.6428 2.68077 11.431 3.89254C10.2192 5.10431 9.53846 6.74783 9.53846 8.46154C9.53846 12.0305 15.1589 20.8925 15.1589 25.6923H16.8411C16.8411 20.9086 22.4615 11.7397 22.4615 8.46154C22.4615 6.74783 21.7808 5.10431 20.569 3.89254C19.3572 2.68077 17.7137 2 16 2ZM16 5.23077C16.8569 5.23077 17.6786 5.57115 18.2845 6.17704C18.8904 6.78293 19.2308 7.60469 19.2308 8.46154C19.2308 9.31839 18.8904 10.1402 18.2845 10.746C17.6786 11.3519 16.8569 11.6923 16 11.6923C15.1431 11.6923 14.3214 11.3519 13.7155 10.746C13.1096 10.1402 12.7692 9.31839 12.7692 8.46154C12.7692 7.60469 13.1096 6.78293 13.7155 6.17704C14.3214 5.57115 15.1431 5.23077 16 5.23077ZM4 5.99823C4 5.60284 4.1173 5.21633 4.33706 4.88758C4.55683 4.55883 4.86918 4.3026 5.23463 4.15129C5.60009 3.99998 6.00222 3.96039 6.39018 4.03753C6.77814 4.11466 7.13451 4.30506 7.41421 4.58464C7.69392 4.86422 7.8844 5.22043 7.96157 5.60822C8.03874 5.99601 7.99914 6.39796 7.84776 6.76325C7.69639 7.12854 7.44004 7.44076 7.11114 7.66043C6.78224 7.88009 6.39556 7.99734 6 7.99734C5.46957 7.99734 4.96086 7.78672 4.58579 7.41181C4.21072 7.03691 4 6.52842 4 5.99823ZM6 27.9885C5.60444 27.9885 5.21776 27.8712 4.88886 27.6516C4.55996 27.4319 4.30362 27.1197 4.15224 26.7544C4.00087 26.3891 3.96126 25.9871 4.03843 25.5993C4.1156 25.2116 4.30608 24.8553 4.58579 24.5758C4.86549 24.2962 5.22186 24.1058 5.60982 24.0287C5.99778 23.9515 6.39992 23.9911 6.76537 24.1424C7.13082 24.2937 7.44318 24.55 7.66294 24.8787C7.8827 25.2075 8 25.594 8 25.9894C8 26.5196 7.78929 27.028 7.41421 27.4029C7.03914 27.7778 6.53043 27.9885 6 27.9885Z" fill="#C4E538" />
+    <path d="M16 2C14.2863 2 12.6428 2.68077 11.431 3.89254C10.2192 5.10431 9.53846 6.74783 9.53846 8.46154C9.53846 12.0305 15.1589 20.8925 15.1589 25.6923H16.8411C16.8411 20.9086 22.4615 11.7397 22.4615 8.46154C22.4615 6.74783 21.7808 5.10431 20.569 3.89254C19.3572 2.68077 17.7137 2 16 2ZM16 5.23077C16.8569 5.23077 17.6786 5.57115 18.2845 6.17704C18.8904 6.78293 19.2308 7.60469 19.2308 8.46154C19.2308 9.31839 18.8904 10.1402 18.2845 10.746C17.6786 11.3519 16.8569 11.6923 16 11.6923C15.1431 11.6923 14.3214 11.3519 13.7155 10.746C13.1096 10.1402 12.7692 9.31839 12.7692 8.46154C12.7692 7.60469 13.1096 6.78293 13.7155 6.17704C14.3214 5.57115 15.1431 5.23077 16 5.23077Z" fill="#C4E538" />
   </svg>
 );
 
 const CallIcon = () => (
   <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
-    <path d="M9.05143 3.02286L10.9486 2.45143C11.8122 2.19088 12.7411 2.25352 13.5619 2.62765C14.3827 3.00178 15.0393 3.66182 15.4091 4.48457L16.5897 7.11086C16.9078 7.81836 16.9964 8.6077 16.8431 9.36813C16.6898 10.1286 16.3023 10.8219 15.7349 11.3509L13.672 13.2743C13.6473 13.2988 13.6265 13.3269 13.6103 13.3577C13.3943 13.7989 13.7223 14.9771 14.7497 16.7577C15.9086 18.7646 16.8034 19.5577 17.2183 19.4354L19.9257 18.6069C20.6672 18.3804 21.4609 18.3917 22.1957 18.6391C22.9304 18.8864 23.5693 19.3575 24.0229 19.9863L25.7006 22.3097C26.2273 23.0392 26.4713 23.9352 26.3872 24.831C26.3031 25.7269 25.8967 26.5618 25.2434 27.1806L23.8 28.5463C23.2981 29.0217 22.6885 29.3687 22.0235 29.5576C21.3584 29.7464 20.6575 29.7716 19.9806 29.6309C15.9611 28.7943 12.36 25.5577 9.14629 19.992C5.93143 14.4229 4.92914 9.68 6.22057 5.77943C6.43675 5.12641 6.80694 4.53501 7.29986 4.05522C7.79278 3.57543 8.39281 3.22133 9.05143 3.02286ZM9.54857 4.664C9.15338 4.78303 8.79265 4.99544 8.49686 5.28327C8.20107 5.57111 7.9789 5.92592 7.84914 6.31771C6.736 9.67886 7.63771 13.9486 10.632 19.1349C13.624 24.3177 16.8674 27.232 20.3314 27.952C20.7376 28.0363 21.1581 28.0211 21.5571 27.9076C21.9561 27.7942 22.3218 27.5859 22.6229 27.3006L24.0651 25.936C24.417 25.6029 24.636 25.1534 24.6814 24.671C24.7268 24.1885 24.5956 23.7061 24.312 23.3131L22.6343 20.9886C22.3901 20.6501 22.0462 20.3965 21.6506 20.2633C21.2551 20.13 20.8278 20.1239 20.4286 20.2457L17.7143 21.0766C16.2126 21.5234 14.8 20.272 13.2663 17.6137C11.9669 15.3646 11.5166 13.7394 12.072 12.6046C12.1802 12.3836 12.3242 12.189 12.504 12.0206L14.5669 10.0971C14.8725 9.81232 15.0813 9.43894 15.1639 9.0294C15.2465 8.61987 15.1988 8.19474 15.0274 7.81371L13.8457 5.18857C13.6466 4.74544 13.293 4.38994 12.8509 4.18846C12.4088 3.98699 11.9085 3.95331 11.4434 4.09371L9.54857 4.664Z" fill="#C4E538" />
+    <path d="M9.05143 3.02286L10.9486 2.45143C11.8122 2.19088 12.7411 2.25352 13.5619 2.62765C14.3827 3.00178 15.0393 3.66182 15.4091 4.48457L16.5897 7.11086C16.9078 7.81836 16.9964 8.6077 16.8431 9.36813C16.6898 10.1286 16.3023 10.8219 15.7349 11.3509L13.672 13.2743C13.6473 13.2988 13.6265 13.3269 13.6103 13.3577C13.3943 13.7989 13.7223 14.9771 14.7497 16.7577C15.9086 18.7646 16.8034 19.5577 17.2183 19.4354L19.9257 18.6069C20.6672 18.3804 21.4609 18.3917 22.1957 18.6391C22.9304 18.8864 23.5693 19.3575 24.0229 19.9863L25.7006 22.3097C26.2273 23.0392 26.4713 23.9352 26.3872 24.831C26.3031 25.7269 25.8967 26.5618 25.2434 27.1806L23.8 28.5463C23.2981 29.0217 22.6885 29.3687 22.0235 29.5576C21.3584 29.7464 20.6575 29.7716 19.9806 29.6309C15.9611 28.7943 12.36 25.5577 9.14629 19.992C5.93143 14.4229 4.92914 9.68 6.22057 5.77943C6.43675 5.12641 6.80694 4.53501 7.29986 4.05522C7.79278 3.57543 8.39281 3.22133 9.05143 3.02286Z" fill="#C4E538" />
   </svg>
 );
 
@@ -226,15 +42,592 @@ const MapIcon = () => (
 );
 
 const LeftArrowIcon = () => (
-    <svg className="size-5" fill="none" viewBox="0 0 20 20">
-        <path d="M11.9108 4.41081C12.2362 4.08537 12.7638 4.08537 13.0892 4.41081C13.4146 4.73624 13.4146 5.26376 13.0892 5.58919L8.67838 10L13.0892 14.4108L13.1462 14.4743C13.4131 14.8016 13.3943 15.2841 13.0892 15.5892C12.7841 15.8943 12.3016 15.9131 11.9743 15.6462L11.9108 15.5892L6.91081 10.5892C6.58537 10.2638 6.58537 9.73624 6.91081 9.41081L11.9108 4.41081Z" fill="white" />
-    </svg>
+  <svg className="size-5" fill="none" viewBox="0 0 20 20">
+    <path d="M11.9108 4.41081C12.2362 4.08537 12.7638 4.08537 13.0892 4.41081C13.4146 4.73624 13.4146 5.26376 13.0892 5.58919L8.67838 10L13.0892 14.4108L13.1462 14.4743C13.4131 14.8016 13.3943 15.2841 13.0892 15.5892C12.7841 15.8943 12.3016 15.9131 11.9743 15.6462L11.9108 15.5892L6.91081 10.5892C6.58537 10.2638 6.58537 9.73624 6.91081 9.41081L11.9108 4.41081Z" fill="white" />
+  </svg>
 );
 
 const RightArrowIcon = () => (
-    <svg className="size-5" fill="none" viewBox="0 0 20 20">
-        <path d="M8.08919 4.41081C7.76375 4.08537 7.23624 4.08537 6.91081 4.41081C6.58537 4.73624 6.58537 5.26376 6.91081 5.58919L11.3216 10L6.91081 14.4108L6.85384 14.4743C6.58688 14.8016 6.60571 15.2841 6.91081 15.5892C7.2159 15.8943 7.6984 15.9131 8.02571 15.6462L8.08919 15.5892L13.0892 10.5892C13.4146 10.2638 13.4146 9.73624 13.0892 9.41081L8.08919 4.41081Z" fill="white" />
-    </svg>
+  <svg className="size-5" fill="none" viewBox="0 0 20 20">
+    <path d="M8.08919 4.41081C7.76375 4.08537 7.23624 4.08537 6.91081 4.41081C6.58537 4.73624 6.58537 5.26376 6.91081 5.58919L11.3216 10L6.91081 14.4108L6.85384 14.4743C6.58688 14.8016 6.60571 15.2841 6.91081 15.5892C7.2159 15.8943 7.6984 15.9131 8.02571 15.6462L8.08919 15.5892L13.0892 10.5892C13.4146 10.2638 13.4146 9.73624 13.0892 9.41081L8.08919 4.41081Z" fill="white" />
+  </svg>
 );
+
+// Interface definitions
+interface CaseStudy {
+  id: number;
+  title: string;
+  type?: string;
+  stats?: Array<{
+    value: string;
+    label: string;
+    description: string;
+  }>;
+  objective?: string;
+  whatWeDid?: string[];
+  impact?: string[];
+  infoCards: Array<{
+    icon: React.ReactNode;
+    text: string;
+  }>;
+  sectors?: Array<{
+    name: string;
+    percentage: string;
+    position: { top: string; left: string };
+  }>;
+  processCards?: Array<{
+    icon: React.ReactNode;
+    text: string;
+  }>;
+}
+
+// Case studies data
+const caseStudies: CaseStudy[] = [
+  {
+    id: 1,
+    title: "Smart M&A Targeting for United Clinics — Poland's Dental Market",
+    stats: [
+      {
+        value: "22k+",
+        label: "Clinics Identified",
+        description: "Web scraping + registry mining",
+      },
+      {
+        value: "900",
+        label: "Validated Targets",
+        description: "Delivered in",
+      },
+      {
+        value: "2",
+        label: "Acquisitions closed in 30 days",
+        description: "10x faster than Traditional Consulting",
+      },
+    ],
+    infoCards: [
+      { icon: <DataVisIcon />, text: "Smart data aggregation" },
+      { icon: <LogicalPartitionIcon />, text: "AI logic filters" },
+      { icon: <GraphBarIncreaseIcon />, text: "Proxy model: dental chair count" },
+      { icon: <GeoFenceIcon />, text: "Geo + demand overlays" },
+      { icon: <CallIcon />, text: "Selective cold calling" },
+      { icon: <MapIcon />, text: "3D Map Validation" },
+    ],
+  },
+  {
+    id: 2,
+    title: "Defence Cybersecurity Screening — NATO Region",
+    type: "detailed",
+    objective: "Identify bolt-on acquisition and partnership targets in defence-aligned cybersecurity across Nordics and Eastern Europe (NATO region).",
+    whatWeDid: [
+      "Mapped 2,700+ cybersecurity firms",
+      "Applied filters for defence relevance + tech specialization",
+      "Ranked targets using a custom scoring engine",
+      "Shortlisted 124 high-relevance companies",
+      "Vetted for certifications, team depth, and tech stack"
+    ],
+    impact: [
+      "Exceeded expectations: 124 targets vs. 10–15",
+      "Enabled entry into new defence ecosystems",
+      "Surfaced targets missed by traditional deal methods"
+    ],
+    infoCards: [
+      { icon: <DataVisIcon />, text: "2,700+ cybersecurity firms" },
+      { icon: <LogicalPartitionIcon />, text: "Smart filters: defence alignment + services" },
+      { icon: <GraphBarIncreaseIcon />, text: "Thematic scoring engine" },
+      { icon: <GeoFenceIcon />, text: "Shortlist of 124 targets" },
+      { icon: <CallIcon />, text: "Certifications + R&D team filters" },
+      { icon: <MapIcon />, text: "Outcome: Entry into new markets" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Sector Mapping of B2B Niche Vertical Tech Across Europe",
+    type: "map",
+    sectors: [
+      { name: "LegalTech", percentage: "12.5%", position: { top: "9%", left: "15%" } },
+      { name: "Construction", percentage: "7.8%", position: { top: "40%", left: "9%" } },
+      { name: "AgriTech", percentage: "9.1%", position: { top: "75%", left: "14%" } },
+      { name: "CRM Platforms", percentage: "13%", position: { top: "51%", left: "40%" } },
+      { name: "EdTech", percentage: "4.8%", position: { top: "7%", left: "44%" } },
+      { name: "Industrial IoT", percentage: "11%", position: { top: "40%", left: "73%" } },
+      { name: "AI/LLM SaaS", percentage: "8.6%", position: { top: "11%", left: "68%" } },
+      { name: "HR Tech", percentage: "2.4%", position: { top: "75%", left: "74%" } },
+      { name: "CRM Platforms", percentage: "2.4%", position: { top: "77%", left: "40%" } },
+    ],
+    processCards: [
+      { icon: <GraphBarIncreaseIcon />, text: "Investment trends and competitive density analyzed" },
+      { icon: <LogicalPartitionIcon />, text: "Screened using key investment criteria: revenue, EBITDA, team size" },
+      { icon: <DataVisIcon />, text: "Adjacent sector bets identified via peer fund benchmarking" },
+    ],
+    infoCards: [],
+  },
+];
+
+const VerticalConnector = () => (
+  <div className="flex justify-center items-center h-8">
+    <div className="w-px h-full bg-[#c4e538] opacity-30"></div>
+  </div>
+);
+
+const MobileCaseStudy = ({ study }: { study: CaseStudy }) => {
+  if (!study) return null;
+
+  if (study.id === 1) {
+    return (
+      <div className="flex flex-col items-center gap-4 w-full max-w-sm mx-auto p-4">
+        {/* Stat Card 1 */}
+        <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex flex-col justify-center items-center text-center shadow-lg w-full">
+          <h3 className="font-space-grotesk text-xl font-medium text-[#c4e538] uppercase">
+            {study.stats?.[0].label}
+          </h3>
+          <p className="font-space-grotesk text-base text-white">
+            {study.stats?.[0].description}
+          </p>
+          <h3 className="font-space-grotesk text-6xl font-medium text-white uppercase">
+            {study.stats?.[0].value}
+          </h3>
+        </div>
+
+        <VerticalConnector />
+
+        {/* Info Cards - Group 1 & 2 */}
+        <div className="flex flex-col gap-2 w-full">
+          {study.infoCards.map((card, idx) => (
+            <React.Fragment key={idx}>
+              <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-3 flex items-center gap-3 shadow-lg">
+                <div className="relative shrink-0 size-6">{card.icon}</div>
+                <span className="font-space-grotesk text-base leading-tight text-white">{card.text}</span>
+              </div>
+              {idx === 3 && <VerticalConnector />}
+            </React.Fragment>
+          ))}
+        </div>
+        
+        <VerticalConnector />
+
+        {/* Stat Card 3 */}
+        <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex flex-col justify-center items-center text-center shadow-lg w-full">
+          <h3 className="font-space-grotesk text-xl font-medium text-[#c4e538] uppercase">
+            {study.stats?.[2].label}
+          </h3>
+          <p className="font-space-grotesk text-base text-white">
+            {study.stats?.[2].description}
+          </p>
+          <h3 className="font-space-grotesk text-6xl font-medium text-white uppercase">
+            {study.stats?.[2].value}
+          </h3>
+        </div>
+
+        {/* Stat Card 2 */}
+        <div className="bg-[#c4e538] text-black border border-[#192c28] rounded-lg p-4 flex flex-col justify-center items-center text-center shadow-lg w-full mt-2">
+            <p className="font-space-grotesk text-base text-[#333333]">{study.stats?.[1].description}</p>
+            <h3 className="font-space-grotesk text-xl font-medium text-[#141414] uppercase">
+                <span className="text-4xl">{study.stats?.[1].value}</span> {study.stats?.[1].label}
+            </h3>
+        </div>
+      </div>
+    );
+  }
+
+  if (study.id === 2) {
+    return (
+      <div className="flex flex-col items-center gap-4 w-full max-w-sm mx-auto p-4">
+        {/* Main content card */}
+        <div className="bg-gradient-to-r from-[#142420] to-[#304323] border border-[#c4e538] rounded-lg p-4 flex flex-col gap-4 w-full shadow-lg">
+          <div>
+            <h3 className="font-space-grotesk text-lg font-medium text-[#c4e538]">Objective</h3>
+            <p className="font-space-grotesk text-sm text-white mt-1 leading-relaxed">{study.objective}</p>
+          </div>
+          <div>
+            <h3 className="font-space-grotesk text-lg font-medium text-[#c4e538]">What We Did:</h3>
+            <ul className="list-disc list-inside text-white font-space-grotesk text-sm space-y-1 mt-1">
+              {study.whatWeDid?.map((item, idx) => (<li key={idx} className="leading-relaxed">{item}</li>))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-space-grotesk text-lg font-medium text-[#c4e538]">Impact:</h3>
+            <ul className="list-disc list-inside text-white font-space-grotesk text-sm space-y-1 mt-1">
+              {study.impact?.map((item, idx) => (<li key={idx} className="leading-relaxed">{item}</li>))}
+            </ul>
+          </div>
+        </div>
+
+        <VerticalConnector />
+
+        {/* Info Cards */}
+        <div className="flex flex-col gap-2 w-full">
+          {study.infoCards.map((card, idx) => (
+            <div key={idx} className={`bg-gradient-to-r ${idx % 2 === 0 ? 'from-[#142420] to-[#304323]' : 'from-[#304323] to-[#142420]'} border border-[#4f6426] rounded-lg p-3 flex items-center gap-3 shadow-lg`}>
+              <div className="relative shrink-0 size-6">{card.icon}</div>
+              <span className="font-space-grotesk text-base text-white leading-tight">{card.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (study.id === 3) {
+    return (
+      <div className="flex flex-col items-center gap-4 w-full max-w-sm mx-auto p-4">
+        {/* Map section */}
+        <div className="bg-gradient-to-r from-[#142420] to-[#304323] border border-[#4f6426] rounded-lg p-4 relative w-full h-80 shadow-lg overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden rounded-lg">
+            <img src="/assets/world-map-new.svg" alt="World Map" className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full max-w-none transform -translate-x-1/2 -translate-y-1/2 scale-[1.8] opacity-10" style={{ objectPosition: 'center 40%' }}/>
+          </div>
+          <div className="absolute bottom-4 left-4 right-4 flex flex-col items-center gap-4">
+            <div className="bg-[#d0f030] rounded-lg p-3 shadow-lg w-56 text-center">
+              <div className="text-[#141414] font-space-grotesk">
+                <div className="text-base font-bold leading-tight">100+ High-Growth</div>
+                <div className="text-sm leading-tight">Tech Verticals Identified</div>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-center gap-2">
+              {study.sectors?.map((sector, idx) => (
+                <div key={idx} className="bg-gradient-to-r from-[#304323] to-[#142420] border border-[rgba(208,240,48,0.2)] rounded px-2 py-1 shadow-lg">
+                  <div className="font-space-grotesk text-xs leading-tight">
+                    <span className="text-white">{sector.name} </span>
+                    <span className="text-[#d0f030]">({sector.percentage})</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <VerticalConnector />
+        
+        {/* Grid section */}
+        <div className="bg-[#1420] border border-[#4f6426] rounded-lg p-2 w-full h-48 shadow-lg relative">
+          <div className="grid grid-cols-11 gap-0.5 h-full w-full">
+            {Array.from({ length: 110 }).map((_, i) => (<div key={i} className={`w-full h-full rounded-sm ${[5, 6, 9, 11, 17, 19, 27, 34, 41, 47, 52, 58, 67, 73, 78, 84, 90, 97, 107].includes(i) ? 'bg-[#21413c]' : 'border border-[#21413c]'}`}/>))}
+          </div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#d0f030] rounded-lg p-3 shadow-lg w-48 text-center">
+            <div className="text-[#141414] font-space-grotesk text-sm leading-tight">
+              <span>Identified 15 overlooked but </span>
+              <span className="font-bold">high-fit sectors</span>
+            </div>
+          </div>
+        </div>
+
+        <VerticalConnector />
+        
+        {/* Process cards */}
+        <div className="flex flex-col gap-2 w-full">
+            {study.processCards?.map((card, idx) => (
+                <div key={idx} className="bg-gradient-to-r from-[#304323] to-[#142420] border border-[#4f6426] rounded-lg p-3 flex flex-col justify-end h-24 shadow-lg">
+                    <div className="flex flex-col gap-2 items-start">
+                    <div className="relative shrink-0 size-5">{card.icon}</div>
+                    <div className="font-space-grotesk text-sm text-white leading-tight w-full">{card.text}</div>
+                    </div>
+                </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback for other case studies
+  return (
+    <div className="flex flex-col items-center gap-4 w-full p-4">
+      <p>Mobile view for this case study is not yet implemented.</p>
+    </div>
+  );
+};
+
+
+const CaseStudiesSection = () => {
+  const [currentCase, setCurrentCase] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile || !scrollContainerRef.current) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+                    setCurrentCase(index);
+                }
+            });
+        },
+        {
+            root: scrollContainerRef.current,
+            threshold: 0.5,
+        }
+    );
+
+    const items = scrollContainerRef.current.querySelectorAll('.case-study-mobile-item');
+    items.forEach((item) => observer.observe(item));
+
+    return () => {
+        items.forEach((item) => observer.unobserve(item));
+    };
+  }, [isMobile]);
+
+  const handleNext = () => {
+    setCurrentCase((prev) => (prev + 1) % caseStudies.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentCase((prev) => (prev - 1 + caseStudies.length) % caseStudies.length);
+  };
+
+  const study = caseStudies[currentCase];
+
+  return (
+    <div className="bg-primary-green text-white px-4 py-20 relative overflow-hidden">
+        {/* Top-Left Decorator */}
+        <div className="absolute top-0 left-0 w-3/4 h-auto z-0 opacity-50">
+            <Image
+                src="/assets/left-pattern.svg"
+                alt="Decorative pattern"
+                layout="responsive"
+                width={971}
+                height={412}
+            />
+        </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header */}
+        <div className="flex flex-col items-center gap-6 text-center mb-16">
+          <div className="bg-[#21413c] rounded-[40px] px-4 py-2 inline-block">
+            <span className="font-space-grotesk text-base uppercase tracking-wider">
+              Case Study {isMobile ? currentCase + 1 : study.id}
+            </span>
+          </div>
+          <h2 className="font-instrument-serif text-4xl md:text-5xl lg:text-6xl max-w-4xl leading-tight">
+            {isMobile ? caseStudies[currentCase].title : study.title}
+          </h2>
+        </div>
+
+        {/* Content Wrapper */}
+        <div className="min-h-[520px] flex items-center justify-center">
+          {isMobile ? (
+            <div className="w-full">
+              <div ref={scrollContainerRef} className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+                  {caseStudies.map((study, index) => (
+                      <div key={study.id} data-index={index} className="case-study-mobile-item w-full flex-shrink-0 snap-center">
+                          <MobileCaseStudy study={study} />
+                      </div>
+                  ))}
+              </div>
+              {/* Dots indicator */}
+              <div className="flex justify-center gap-2 mt-8">
+                  {caseStudies.map((_, index) => (
+                      <div
+                          key={index}
+                          className={`w-2 h-2 rounded-full transition-colors ${currentCase === index ? 'bg-white' : 'bg-gray-600'}`}
+                      />
+                  ))}
+              </div>
+            </div>
+          ) : (
+            <>
+              {!study.type && (
+                <div className="flex items-center justify-start lg:justify-center gap-4 min-w-[1200px] px-4">
+                  {/* Card 1 */}
+                  <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
+                    <h3 className="font-space-grotesk text-2xl font-medium text-[#c4e538] uppercase">
+                      {study.stats?.[0].label}
+                    </h3>
+                    <p className="font-space-grotesk text-lg">
+                      {study.stats?.[0].description}
+                    </p>
+                    <h3 className="font-space-grotesk text-7xl font-medium text-white uppercase">
+                      {study.stats?.[0].value}
+                    </h3>
+                  </div>
+
+                  {/* Connecting graphic */}
+                  <div className="h-full relative shrink-0 w-[72px]">
+                    <svg className="block size-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 72 435">
+                      <path d="M72 28.0005H50.3945C42.6629 28.0007 36.3948 34.2688 36.3945 42.0005V164.42C39.6945 160.342 44.7396 157.733 50.3945 157.733H72V161.733H50.3945C42.6629 161.733 36.3948 168.001 36.3945 175.733V201.415C36.3945 208.381 32.4356 214.423 26.6455 217.415C32.4357 220.406 36.3944 226.448 36.3945 233.415V259.096C36.3945 266.828 42.6627 273.096 50.3945 273.096H72V277.096H50.3945C44.7394 277.096 39.6944 274.488 36.3945 270.409V393C36.3945 400.731 42.6627 406.999 50.3945 407H72V411H50.3945C40.4536 410.999 32.3945 402.941 32.3945 393V233.415C32.3943 225.804 26.3207 219.611 18.7559 219.419L18.3945 219.415H0V215.415H18.3945L18.7559 215.411C26.3209 215.219 32.3945 209.026 32.3945 201.415V42.0005C32.3948 32.0597 40.4537 24.0007 50.3945 24.0005H72V28.0005Z" fill="url(#paint1_linear_397_51212)"/>
+                      <defs>
+                        <linearGradient id="paint1_linear_397_51212" x1="72" x2="0" y1="217.5" y2="217.5" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#192C28"/><stop offset="0.8" stopColor="#C4E538"/><stop offset="1" stopColor="#192C28"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+
+                  {/* Info Cards */}
+                  <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
+                    {study.infoCards.slice(0, 4).map((card, idx) => (
+                      <div key={idx} className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex items-center gap-4 w-64 h-20 shadow-lg">
+                        <div className="relative shrink-0 size-8">{card.icon}</div>
+                        <span className="font-space-grotesk text-lg leading-tight">{card.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Connecting graphic */}
+                  <div className="h-full relative shrink-0 w-[74.012px]">
+                    <svg className="block size-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 75 435">
+                      <path d="M74.0098 28H38.4062V150.64C38.4062 152.582 38.7994 153.869 39.3555 154.752C39.9026 155.62 40.7146 156.268 41.8672 156.752C44.3229 157.784 47.8942 157.925 52.4062 157.925H74.0117V161.925H52.4062C48.0817 161.925 43.6525 161.841 40.3174 160.439C39.6423 160.156 38.9996 159.813 38.4023 159.401V201.331H38.6172V259.105C38.6172 260.053 38.5436 260.984 38.4023 261.893V393C38.4021 402.941 30.3433 411 20.4023 411H0.0078125V407H20.4023C28.1342 407 34.4021 400.732 34.4023 393V270.678C31.1004 274.607 26.1511 277.105 20.6172 277.105H0.0117188V273.105H20.6172C27.5118 273.105 33.242 268.121 34.4023 261.56V128.571H34.4062V28H0V24H74.0098V28Z" fill="url(#paint2_linear_397_51151)"/>
+                      <defs>
+                        <linearGradient id="paint2_linear_397_51151" x1="73.0379" x2="0" y1="217.5" y2="217.5" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#192C28"/><stop offset="0.8" stopColor="#C4E538"/><stop offset="1" stopColor="#192C28"/>
+                        </linearGradient>
+                      </defs>
+                    </svg>
+                  </div>
+
+                  {/* Info Cards */}
+                  <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
+                    {study.infoCards.slice(4, 6).map((card, idx) => (
+                      <div key={idx} className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex items-center gap-4 w-64 h-20 shadow-lg">
+                        <div className="relative shrink-0 size-8">{card.icon}</div>
+                        <span className="font-space-grotesk text-lg leading-tight">{card.text}</span>
+                      </div>
+                    ))}
+                    <div className="bg-[#c4e538] text-black border border-[#192c28] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-44 shadow-lg">
+                      <p className="font-space-grotesk text-lg text-[#333333]">{study.stats?.[1].description}</p>
+                      <h3 className="font-space-grotesk text-2xl font-medium text-[#141414] uppercase">
+                        <span className="text-5xl">{study.stats?.[1].value}</span> {study.stats?.[1].label}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Final card */}
+                  <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
+                    <h3 className="font-space-grotesk text-2xl font-medium text-[#c4e538] uppercase">
+                      {study.stats?.[2].label}
+                    </h3>
+                    <p className="font-space-grotesk text-lg">
+                      {study.stats?.[2].description}
+                    </p>
+                    <h3 className="font-space-grotesk text-7xl font-medium text-white uppercase">
+                      {study.stats?.[2].value}
+                    </h3>
+                  </div>
+                </div>
+              )}
+
+              {study.type === "detailed" && (
+                <div className="flex items-start justify-center gap-6 w-full px-4 h-[516px]">
+                  {/* Left side */}
+                  <div className="bg-gradient-to-r from-[#192c28] to-[#304323] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-between w-[600px] h-full shadow-lg flex-shrink-0">
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-space-grotesk text-xl font-medium text-[#c4e538]">Objective</h3>
+                      <p className="font-space-grotesk text-lg text-white leading-relaxed">{study.objective}</p>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-space-grotesk text-xl font-medium text-[#c4e538]">What We Did:</h3>
+                      <ul className="list-disc list-inside text-white font-space-grotesk text-lg space-y-1">
+                        {study.whatWeDid?.map((item, idx) => (<li key={idx} className="leading-relaxed">{item}</li>))}
+                      </ul>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-space-grotesk text-xl font-medium text-[#c4e538]">Impact:</h3>
+                      <ul className="list-disc list-inside text-white font-space-grotesk text-lg space-y-1">
+                        {study.impact?.map((item, idx) => (<li key={idx} className="leading-relaxed">{item}</li>))}
+                      </ul>
+                    </div>
+                  </div>
+                  {/* Arrow */}
+                  <div className="h-full relative shrink-0 w-[56px] flex items-center justify-center">
+                    <svg className="block w-full h-[14.728px]" fill="none" viewBox="0 0 49 15">
+                      <path d="M0 7.5h40m-6-6l6 6-6 6" stroke="#c4e538" strokeWidth="2" fill="none"/>
+                    </svg>
+                  </div>
+                  {/* Right side */}
+                  <div className="flex flex-col gap-3 flex-shrink-0 h-full justify-start w-[400px]">
+                    {study.infoCards.map((card, idx) => (
+                      <div key={idx} className={`bg-gradient-to-r ${idx % 2 === 0 ? 'from-[#142420] to-[#304323]' : 'from-[#304323] to-[#142420]'} border border-[#4f6426] rounded-lg p-4 flex items-center gap-4 h-[72px] shadow-lg`}>
+                        <div className="relative shrink-0 size-8">{card.icon}</div>
+                        <span className="font-space-grotesk text-lg text-white leading-tight">{card.text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {study.type === "map" && (
+                <div className="flex flex-col items-center justify-center w-full">
+                  <div className="flex items-start justify-center gap-8 w-full px-4">
+                    {/* Left side */}
+                    <div className="bg-gradient-to-r from-[#142420] to-[#304323] border border-[#4f6426] rounded-lg p-6 relative w-[800px] h-[328px] shadow-lg flex-shrink-0 overflow-hidden">
+                      <div className="absolute inset-0 overflow-hidden rounded-lg">
+                        <img src="/assets/world-map-new.svg" alt="World Map" className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full max-w-none transform -translate-x-1/2 -translate-y-1/2 scale-[2] opacity-10" style={{ objectPosition: 'center 40%' }}/>
+                      </div>
+                      {study.sectors?.map((sector, idx) => (
+                        <div key={idx} className="absolute bg-gradient-to-r from-[#304323] to-[#142420] border border-[rgba(208,240,48,0.2)] rounded px-3 py-1.5 shadow-lg" style={{top: sector.position.top, left: sector.position.left}}>
+                          <div className="font-space-grotesk text-sm leading-tight">
+                            <span className="text-white">{sector.name} </span>
+                            <span className="text-[#d0f030]">({sector.percentage})</span>
+                          </div>
+                        </div>
+                      ))}
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#d0f030] rounded-lg p-4 shadow-lg w-[240px] text-center">
+                        <div className="text-[#141414] font-space-grotesk">
+                          <div className="text-lg font-bold leading-tight">100+ High-Growth</div>
+                          <div className="text-base leading-tight">Tech Verticals Identified</div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Arrow */}
+                    <div className="h-[328px] relative shrink-0 w-[56px] flex items-center justify-center">
+                      <svg className="block w-full h-[14.728px]" fill="none" viewBox="0 0 49 15">
+                        <path d="M0 7.5h40m-6-6l6 6-6 6" stroke="#c4e538" strokeWidth="2" fill="none"/>
+                      </svg>
+                    </div>
+                    {/* Right side */}
+                    <div className="bg-[#1420] border border-[#4f6426] rounded-lg p-2 w-[328px] h-[328px] shadow-lg flex-shrink-0 relative">
+                      <div className="grid grid-cols-11 gap-0.5 h-full w-full">
+                        {Array.from({ length: 110 }).map((_, i) => (<div key={i} className={`w-6 h-6 rounded-sm ${[5, 6, 9, 11, 17, 19, 27, 34, 41, 47, 52, 58, 67, 73, 78, 84, 90, 97, 107].includes(i) ? 'bg-[#21413c]' : 'border border-[#21413c]'}`}/>))}
+                      </div>
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#d0f030] rounded-lg p-4 shadow-lg w-[200px] text-center">
+                        <div className="text-[#141414] font-space-grotesk text-lg leading-tight">
+                          <span>Identified 15 overlooked but </span>
+                          <span className="font-bold">high-fit sectors</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Process cards */}
+                  {study.processCards && (
+                    <div className="flex flex-row gap-4 items-start justify-center w-full mt-8 px-4 max-w-[1200px]">
+                      {study.processCards.map((card, idx) => (
+                        <div key={idx} className="bg-gradient-to-r from-[#304323] to-[#142420] border border-[#4f6426] rounded-lg p-6 flex flex-col justify-end h-[120px] flex-1 shadow-lg">
+                          <div className="flex flex-col gap-4 items-start">
+                            <div className="relative shrink-0 size-6">{card.icon}</div>
+                            <div className="font-space-grotesk text-lg text-white leading-tight w-full">{card.text}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Navigation */}
+        {!isMobile && (
+          <div className="flex flex-row gap-6 items-center justify-center mt-10">
+            <button onClick={handlePrev} className="bg-[#21413c] rounded-full p-4 transition-opacity hover:opacity-80 disabled:opacity-40">
+              <LeftArrowIcon />
+            </button>
+            <button onClick={handleNext} className="bg-[#21413c] rounded-full p-4 transition-opacity hover:opacity-80 disabled:opacity-40">
+              <RightArrowIcon />
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default CaseStudiesSection; 

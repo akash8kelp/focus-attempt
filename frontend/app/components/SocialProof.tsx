@@ -12,7 +12,7 @@ const CountUp = ({ end }: { end: number }) => {
   useEffect(() => {
     if (inView) {
       let start = 0;
-      const duration = 500;
+      const duration = 1000;
       const frameRate = 30;
       const totalFrames = duration / (1000 / frameRate);
       const increment = end / totalFrames;
@@ -122,14 +122,14 @@ export default function SocialProof() {
           const suffix = stat.value.replace(/[0-9]/g, '');
           
           return (
-            <div key={index} className="flex flex-col items-center text-center gap-2">
-              <span className="font-instrument-serif text-stats leading-stats text-gray-900">
+          <div key={index} className="flex flex-col items-center text-center gap-2">
+            <span className="font-instrument-serif text-stats leading-stats text-gray-900">
                 {isNaN(numericValue) ? stat.value : <><CountUp end={numericValue} />{suffix}</>}
-              </span>
-              <span className="font-space-grotesk text-nav leading-button uppercase text-gray-600">
-                {stat.label}
-              </span>
-            </div>
+            </span>
+            <span className="font-space-grotesk text-nav leading-button uppercase text-gray-600">
+              {stat.label}
+            </span>
+          </div>
           )
         })}
       </div>

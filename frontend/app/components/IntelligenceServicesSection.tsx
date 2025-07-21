@@ -148,16 +148,16 @@ const ServiceCard = ({ service, isMobileOrTablet, isPlaying, onVisibilityChange,
             <div className="flex flex-col gap-4 items-start">
                 <div className="h-20">
                     <div className="flex flex-col gap-2">
-                        <h3 className="capitalize font-space-grotesk font-medium text-[#141414] text-xl md:text-2xl leading-[1.2]">
+                        <h3 className="capitalize font-space-grotesk font-medium text-gray-900 text-xl md:text-2xl leading-[1.2]">
                             {service.title}
                         </h3>
-                        <p className="font-space-grotesk font-normal text-[#333333] text-base leading-[1.2]">
+                        <p className="font-space-grotesk font-normal text-gray-600 text-base leading-[1.2]">
                             {service.description}
                         </p>
                     </div>
                 </div>
                 <button onClick={onStartSearch} className="flex items-center gap-2 h-12 w-[145px] hover:opacity-80 transition-opacity">
-                    <span className="font-space-grotesk font-bold text-sm text-[#141414]">
+                    <span className="font-space-grotesk font-bold text-sm text-gray-900">
                         Start your Search
                     </span>
                     <div className="w-4 h-4">
@@ -239,14 +239,14 @@ export default function IntelligenceServicesSection({ onStartSearch }: { onStart
         <div className="w-full max-w-7xl mx-auto z-10">
             <div className="flex flex-col items-center text-center mb-8 md:mb-16">
                 <div className="mb-4">
-                    <span className="text-[#333333] font-space-grotesk text-sm md:text-base font-normal tracking-widest uppercase">
+                    <span className="text-gray-600 font-space-grotesk text-sm md:text-base font-normal tracking-widest uppercase">
                         Our Intelligence Services
                     </span>
                 </div>
-                <h2 className="text-[#141414] font-instrument-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight text-center">
+                <h2 className="text-gray-900 font-instrument-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight text-center">
                     Our Intelligence Services
                 </h2>
-                <p className="text-[#333333] font-space-grotesk text-base font-normal leading-tight text-center max-w-xl">
+                <p className="text-gray-600 font-space-grotesk text-base font-normal leading-tight text-center max-w-xl">
                     See how leading companies have transformed their businesses with Pulse's market intelligence
                 </p>
             </div>

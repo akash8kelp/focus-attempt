@@ -43,7 +43,7 @@ const BarChartIcon = () => (
     </svg>
 );
 
-const problems = [
+  const problems = [
     {
       icon: <VpnLockIcon />,
       problem: "Tired of juggling multiple databases?",
@@ -69,25 +69,25 @@ const problems = [
       problem: "Struggling to gauge strategic fit?",
       solution: "Our experts highlight the right signals—like cross-sell potential, distribution channel synergies, and more—to help you spot true strategic value."
     }
-]
+  ]
 
 export default function ProblemsSection() {
-    return (
+  return (
         <section className="bg-[#f8fcf7] relative w-full py-20">
             <div className="flex flex-col items-center gap-[120px] w-full">
                 <div className="flex flex-col gap-20 items-start w-full px-5 md:px-[120px]">
                     <div className="w-full">
                         <div className="flex flex-col items-center gap-6 text-center px-4 md:px-[200px]">
                             <p className="font-['Space_Grotesk'] font-normal text-[#333333] text-base tracking-[0.64px] uppercase">
-                                problems we're solving
-                            </p>
+          problems we're solving
+        </p>
                             <h2 className="font-['Instrument_Serif'] text-4xl md:text-6xl text-[#142420]">
                                 Why Pulse beat <em className="underline">DIY?</em>
-                            </h2>
+        </h2>
                             <p className="font-['Space_Grotesk'] font-normal text-[#333333] text-lg">
                                 Doing it yourself means hours of Googling, cross-checking, and second-guessing. Pulse turns that chaos into clarity, instantly.
-                            </p>
-                        </div>
+        </p>
+      </div>
                     </div>
 
                     <div className="flex flex-col md:flex-row gap-4 md:overflow-x-auto w-full pb-4 md:[-ms-overflow-style:none] md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden">
@@ -101,14 +101,14 @@ export default function ProblemsSection() {
                                         {item.problem}
                                     </h3>
                                     <p className="font-['Space_Grotesk'] font-normal text-base text-[#142420]">
-                                        {item.solution}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                        {item.solution}
+                      </p>
+                  </div>
                 </div>
-            </div>
-        </section>
+              ))}
+          </div>
+        </div>
+      </div>
+    </section>
     );
-}
+} 
