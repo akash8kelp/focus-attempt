@@ -72,11 +72,11 @@ const CardPattern = () => (
     </div>
 );
 
-const StepCard = ({ step, isFifth = false }: { step: Step, isFifth?: boolean }) => (
+const StepCard = ({ step, isFifth = false, isShort = false }: { step: Step, isFifth?: boolean, isShort?: boolean }) => (
     <div
       className={`${step.cardBg} relative rounded-lg shrink-0 w-full overflow-hidden flex flex-col`}
     >
-        <div className="box-border content-stretch flex flex-col gap-10 items-start justify-start p-6 md:p-10 relative w-full flex-grow">
+        <div className={`box-border content-stretch flex flex-col items-start justify-start relative w-full flex-grow ${isShort ? 'gap-6 p-4 md:p-8' : 'gap-10 p-6 md:p-10'}`}>
             <CardPattern />
             <div className="bg-[#c4e538] relative rounded-full shrink-0 p-2 flex items-center justify-center size-10">
                 <p className="font-space-grotesk font-bold leading-[1.2] text-lg text-[#192c28]">
@@ -129,10 +129,10 @@ export default function ProcessSection() {
             </div>
           </div>
           
-          <div className="relative w-2/3 mx-auto z-10 flex flex-col gap-6">
+          <div className="relative w-[85vw] lg:w-2/3 mx-auto z-10 flex flex-col gap-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {steps.slice(0, 4).map((step, index) => (
-                <StepCard key={index} step={step} />
+                <StepCard key={index} step={step} isShort={index < 2} />
               ))}
             </div>
             <StepCard step={steps[4]} isFifth={true} />

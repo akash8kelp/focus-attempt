@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 const testimonials = [
@@ -19,6 +19,43 @@ const testimonials = [
 
 export default function TestimonialSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile || !scrollContainerRef.current) return;
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+                    setCurrentIndex(index);
+                }
+            });
+        },
+        {
+            root: scrollContainerRef.current,
+            threshold: 0.5,
+        }
+    );
+
+    const items = scrollContainerRef.current.querySelectorAll('.testimonial-item');
+    items.forEach((item) => observer.observe(item));
+
+    return () => {
+        items.forEach((item) => observer.unobserve(item));
+    };
+  }, [isMobile]);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
@@ -50,29 +87,56 @@ export default function TestimonialSection() {
             </p>
           </div>
           <div className="lg:w-1/2 w-full">
-            <div className="relative">
-              <div className="text-center lg:text-left">
-                <p className="font-space-grotesk font-medium text-xl sm:text-2xl text-white leading-snug">
-                  "{testimonials[currentIndex].quote}"
-                </p>
-                <p className="font-space-grotesk text-lg text-[#c4e538] mt-6">
-                  {testimonials[currentIndex].author}
-                </p>
+            {isMobile ? (
+              <div className="w-full">
+                <div ref={scrollContainerRef} className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+                  {testimonials.map((testimonial, index) => (
+                    <div key={index} data-index={index} className="testimonial-item w-full flex-shrink-0 snap-center">
+                      <div className="text-center p-2 min-h-[220px] flex flex-col justify-center">
+                        <p className="font-space-grotesk font-medium text-xl text-white leading-snug">
+                          "{testimonial.quote}"
+                        </p>
+                        <p className="font-space-grotesk text-lg text-[#c4e538] mt-6">
+                          {testimonial.author}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-center gap-2 mt-8">
+                  {testimonials.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-colors ${currentIndex === index ? 'bg-white' : 'bg-gray-600'}`}
+                    />
+                  ))}
+                </div>
               </div>
+            ) : (
+              <div className="relative">
+                <div className="text-center lg:text-left min-h-[220px]">
+                  <p className="font-space-grotesk font-medium text-xl sm:text-2xl text-white leading-snug">
+                    "{testimonials[currentIndex].quote}"
+                  </p>
+                  <p className="font-space-grotesk text-lg text-[#c4e538] mt-6">
+                    {testimonials[currentIndex].author}
+                  </p>
+                </div>
 
-              <div className="flex justify-center lg:justify-start items-center gap-4 mt-8">
-                <button onClick={handlePrev} className="bg-[#21413c] p-4 rounded-full text-white hover:bg-opacity-80 transition-opacity">
-                  <svg className="size-5" fill="none" viewBox="0 0 20 20">
-                    <path d="M11.9108 4.41081C12.2362 4.08537 12.7638 4.08537 13.0892 4.41081C13.4146 4.73624 13.4146 5.26376 13.0892 5.58919L8.67838 10L13.0892 14.4108L13.1462 14.4743C13.4131 14.8016 13.3943 15.2841 13.0892 15.5892C12.7841 15.8943 12.3016 15.9131 11.9743 15.6462L11.9108 15.5892L6.91081 10.5892C6.58537 10.2638 6.58537 9.73624 6.91081 9.41081L11.9108 4.41081Z" fill="currentColor"/>
-                  </svg>
-                </button>
-                <button onClick={handleNext} className="bg-[#21413c] p-4 rounded-full text-white hover:bg-opacity-80 transition-opacity">
-                  <svg className="size-5" fill="none" viewBox="0 0 20 20">
-                    <path d="M8.08919 4.41081C7.76375 4.08537 7.23624 4.08537 6.91081 4.41081C6.58537 4.73624 6.58537 5.26376 6.91081 5.58919L11.3216 10L6.91081 14.4108L6.85384 14.4743C6.58688 14.8016 6.60571 15.2841 6.91081 15.5892C7.2159 15.8943 7.6984 15.9131 8.02571 15.6462L8.08919 15.5892L13.0892 10.5892C13.4146 10.2638 13.4146 9.73624 13.0892 9.41081L8.08919 4.41081Z" fill="currentColor"/>
-                  </svg>
-                </button>
+                <div className="flex justify-center lg:justify-start items-center gap-4 mt-8">
+                  <button onClick={handlePrev} className="bg-[#21413c] p-4 rounded-full text-white hover:bg-opacity-80 transition-opacity">
+                    <svg className="size-5" fill="none" viewBox="0 0 20 20">
+                      <path d="M11.9108 4.41081C12.2362 4.08537 12.7638 4.08537 13.0892 4.41081C13.4146 4.73624 13.4146 5.26376 13.0892 5.58919L8.67838 10L13.0892 14.4108L13.1462 14.4743C13.4131 14.8016 13.3943 15.2841 13.0892 15.5892C12.7841 15.8943 12.3016 15.9131 11.9743 15.6462L11.9108 15.5892L6.91081 10.5892C6.58537 10.2638 6.58537 9.73624 6.91081 9.41081L11.9108 4.41081Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <button onClick={handleNext} className="bg-[#21413c] p-4 rounded-full text-white hover:bg-opacity-80 transition-opacity">
+                    <svg className="size-5" fill="none" viewBox="0 0 20 20">
+                      <path d="M8.08919 4.41081C7.76375 4.08537 7.23624 4.08537 6.91081 4.41081C6.58537 4.73624 6.58537 5.26376 6.91081 5.58919L11.3216 10L6.91081 14.4108L6.85384 14.4743C6.58688 14.8016 6.60571 15.2841 6.91081 15.5892C7.2159 15.8943 7.6984 15.9131 8.02571 15.6462L8.08919 15.5892L13.0892 10.5892C13.4146 10.2638 13.4146 9.73624 13.0892 9.41081L8.08919 4.41081Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
