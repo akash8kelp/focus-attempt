@@ -18,7 +18,7 @@ const Header = ({ onStartSearch }: { onStartSearch: () => void }) => {
             href="https://kelp.kelpglobal.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-block font-space-grotesk text-sm text-white hover:text-primary-lime transition-colors"
+            className="hidden md:inline-block font-space-grotesk text-sm text-white hover:text-primary-lime transition-colors font-bold"
           >
             Sign In
           </a>

@@ -6,7 +6,7 @@ import TargetAudience from './TargetAudience'
 import ReportDialog from './ReportDialog'
 
 interface HeroSectionProps {
-  onStartSearch?: () => void;
+  onStartSearch: () => void;
   blur?: number; // Blur in pixels
   brightnessTop?: number; // Brightness at the top (0 to 1)
   brightnessBottom?: number; // Brightness at the bottom (0 to 1)
@@ -71,7 +71,7 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 7, brigh
       <div className="absolute top-[415px] left-[96px] w-[1248px] h-[500px] bg-primary-lime rounded-full opacity-50 blur-[600px]" />
 
       {/* Header */}
-      <Header />
+      <Header onStartSearch={onStartSearch} />
 
       {/* Main Content */}
       <div className="relative z-20 flex flex-col gap-120 px-4 md:px-10 lg:px-20 xl:px-160 py-20">
