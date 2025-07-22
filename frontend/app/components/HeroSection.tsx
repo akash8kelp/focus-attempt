@@ -15,16 +15,6 @@ interface HeroSectionProps {
 export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brightnessTop = 0.7, brightnessBottom = 0.2 }: HeroSectionProps) {
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
   const [currentBlur, setCurrentBlur] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
-  }, []);
 
   useEffect(() => {
     const animationDuration = 1000; // 1 second
@@ -82,11 +72,11 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brigh
               <h1 className="hero-title text-4xl md:text-5xl lg:text-hero leading-hero text-center text-text-primary w-full">
                 Unlock Hidden Opportunities, <span className="italic text-[#c4e538]">Globally</span>
               </h1>
-              <p className="font-space-grotesk font-medium text-[1rem] md:text-[1.125rem] lg:text-body leading-[1.93rem] tracking-wide text-center text-text-secondary w-full max-w-[700px]">
-                <span className={`${!isMobile ? 'bg-background-glass backdrop-blur-20' : ''} box-decoration-clone px-2 py-1 rounded-md`}>
+              <div className="font-space-grotesk font-medium text-[1rem] md:text-[1.125rem] lg:text-body leading-[1.93rem] tracking-wide text-center text-text-secondary w-full max-w-[700px]">
+                <div className="px-2 py-1 rounded-md">
                   Expert-led service delivering 2x–6x more companies than traditional static databases. Get AI-powered, detailed company profiles tailored to any business activity and geography of your choice —in just 4 days.
-                </span>
-              </p>
+                </div>
+              </div>
             </div>
             <CTAButtons onStartSearch={onStartSearch} onDownloadReport={openReportDialog} />
           </div>
