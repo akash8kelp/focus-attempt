@@ -4,13 +4,13 @@ export default function TargetAudience() {
   const audiences = [
     'Private Equity',
     'Venture Capital', 
-    'MnA Teams',
+    'M&A Teams',
     'Deal Advisory',
     'Consulting'
   ]
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full">
+    <div className="flex flex-col items-center gap-4 w-full">
       <h2 className="font-space-grotesk text-nav leading-nav text-text-primary">
         Who is it for?
       </h2>

@@ -26,21 +26,21 @@ const steps: Step[] = [
     {
       number: "1",
       title: "Tell Us what you are looking for",
-      description: "— Submit your business search and book a quick intro call.",
+      description: "Submit your business search and book a quick intro call.",
       cardBg: "bg-[#192c28]",
       bottomElement: <Illustration src="/assets/step 1.png" />
     },
     {
       number: "2", 
       title: "Meet our Sector Expert",
-      description: "— We discuss your needs to fully understand the ask.",
+      description: "We discuss your needs to fully understand the ask.",
       cardBg: "bg-[#192c28]",
       bottomElement: <Illustration src="/assets/step 2.png" />
     },
     {
       number: "3",
       title: "You receive scope & pricing by email",
-      description: "— just 15% upfront to start.",
+      description: "Pay 15% upfront to start.",
       cardBg: "bg-[#192c28]",
       bottomElement: <Illustration src="/assets/step 3.png" />
     },
@@ -54,7 +54,7 @@ const steps: Step[] = [
     {
       number: "5",
       title: "Review the list, pay the rest",
-      description: "— we'll send the final invoice.",
+      description: "We'll send the final invoice.",
       cardBg: "bg-[#192c28]",
       bottomElement: <Illustration src="/assets/step 5.png" />
     }
@@ -94,7 +94,7 @@ const StepCard = ({ step, isFifth = false, isShort = false }: { step: Step, isFi
                 </div>
             </div>
         </div>
-        <div className={`relative w-full ${isFifth ? 'aspect-[3.5/1]' : 'aspect-[2.1/1]'}`}>
+        <div className={`relative w-full ${isFifth ? 'aspect-[4.5/1]' : 'aspect-[2.1/1]'}`}>
             {step.bottomElement}
         </div>
     </div>
@@ -132,10 +132,10 @@ export default function ProcessSection() {
           <div className="relative w-[85vw] lg:w-2/3 mx-auto z-10 flex flex-col gap-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {steps.slice(0, 4).map((step, index) => (
-                <StepCard key={index} step={step} isShort={index < 2} />
+                <StepCard key={index} step={step} isShort={index < 4} />
               ))}
             </div>
-            <StepCard step={steps[4]} isFifth={true} />
+            <StepCard step={steps[4]} isFifth={true} isShort={true} />
           </div>
         </div>
     </section>

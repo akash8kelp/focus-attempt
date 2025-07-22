@@ -3,16 +3,16 @@ import Image from 'next/image';
 
 const faqData = [
   {
-    question: "What exactly does Kelp do?",
-    answer: "Kelp provides AI-powered business intelligence and market research to help you make informed decisions quickly and confidently."
+    question: "What exactly does Pulse do?",
+    answer: "Pulkse combines AI with Scan Experts to perform exhaustive searches, delivering detailed intelligence on any company in any industry worldwide. This allows you to make fast, informed, and confident business decisions without the time-consuming research."
   },
   {
     question: "Who is this service for?",
-    answer: "Our service is designed for high-stakes teams, including M&A professionals, corporate strategists, and market researchers who need speed, clarity, and accuracy."
+    answer: "Our service is designed for high-stakes teams, including M&A professionals, corporate strategists, corporate client discovery, and market researchers who need speed, clarity, and accuracy."
   },
   {
     question: "How long does it take to get results?",
-    answer: "Most scans are completed and delivered within 3–5 working days, depending on the scope and complexity of the request."
+    answer: "Most scans are completed and delivered within 3–4 working days, depending on the scope and complexity of the request."
   },
   {
     question: "What geographies do you cover?",
@@ -48,7 +48,7 @@ const FaqItem = ({ item }: FaqItemProps) => {
           <p className="font-space-grotesk font-medium text-[#192c28] text-xl md:text-2xl">
             {item.question}
           </p>
-          <div className="relative shrink-0 w-5 h-5">
+          <div className="relative shrink-0 w-2.5 h-2.5 md:w-5 md:h-5">
             {isOpen ? (
               <svg className="w-full h-full" viewBox="0 0 20 2">
                 <path d="M19 1H1" stroke="#192C28" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

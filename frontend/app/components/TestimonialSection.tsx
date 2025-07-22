@@ -8,12 +8,12 @@ const testimonials = [
     author: "Head of M&A, Global Healthcare Company",
   },
   {
-    quote: "The insights from Pulse were instrumental in our decision-making process. The speed and accuracy of their service are unmatched.",
-    author: "VP of Strategy, Tech Unicorn",
+    quote: "We're already on our 5th sector scan with the team. They completely eliminate the stress of overlooking opportunities and let us dive straight into outreach. An absolute game-changer for our workflow.",
+    author: "Partner, Private Equity Firm",
   },
   {
-    quote: "We were impressed by the depth of analysis and the quality of candidates presented. Pulse is now a standard part of our diligence toolkit.",
-    author: "Partner, Private Equity Firm",
+    quote: "We were impressed by the quality of candidates presented and the speed of delivery. Pulse is now a standard part of our discovery toolkit.",
+    author: "VP of Strategy, Tech Unicorn",
   }
 ];
 

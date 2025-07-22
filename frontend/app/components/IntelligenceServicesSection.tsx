@@ -12,26 +12,26 @@ interface Service {
 
 const services: Service[] = [
     {
-      title: "Instant access to enriched company lists",
-      description: "Websites, financials, scoring, and LinkedIn, all in one view.",
+      title: "Get access to enriched company lists",
+      description: "One view to rule them all — websites, financials, employee data, LinkedIn, and past deals, scored and ready.",
       videoUrl: "/assets/is4.mp4",
       darkCard: true,
     },
     {
       title: "Profiles that go beyond the basics",
-      description: "Products, leadership, socials, clients — everything for a detailed company analysis.",
+      description: "AI-powered profiles covering products, leadership, deals, clients, patents, SWOT, socials and more—built for serious company analysis.",
       videoUrl: "/assets/is5.mp4",
       darkCard: true,
     },
     {
       title: "Ask anything, get instant answers",
-      description: "Our AI chatbot is your on-demand bolt-on analyst.",
+      description: "Ask anything about the companies on your radar—our AI chatbot has the answers.",
       videoUrl: "/assets/is1.mp4",
       darkCard: true,
     },
     {
       title: "Built for team magic",
-      description: "Share lists, drop comments, stay in sync across your deal team.",
+      description: "Share lists, drop comments, stay in sync across your team.",
       videoUrl: "/assets/is2.mp4",
       darkCard: true,
     },
@@ -42,7 +42,7 @@ const services: Service[] = [
       darkCard: true,
     },
     {
-      title: "Experts on call, always",
+      title: "Experts available, always",
       description: "Need a second brain? Our team's got your back, from screening to close.",
       videoUrl: "/assets/is3.mp4",
       darkCard: true,
@@ -240,7 +240,7 @@ export default function IntelligenceServicesSection({ onStartSearch }: { onStart
             <div className="flex flex-col items-center text-center mb-8 md:mb-16">
                 <div className="mb-4">
                     <span className="text-gray-600 font-space-grotesk text-sm md:text-base font-normal tracking-widest uppercase">
-                        Our Intelligence Services
+                        Intelligence Solutions
                     </span>
                 </div>
                 <h2 className="text-gray-900 font-instrument-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-tight text-center">

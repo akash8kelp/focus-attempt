@@ -46,8 +46,8 @@ const BarChartIcon = () => (
   const problems = [
     {
       icon: <VpnLockIcon />,
-      problem: "Tired of juggling multiple databases?",
-      solution: "Pulse gives you exhaustive coverage from a single platform—even in opaque markets."
+      problem: "Tired of bouncing between Crunchbase, PitchBook, and the likes?",
+      solution: "Pulse gives you exhaustive, verified company intelligence—all from a single platform. No more stale data or wasted hours cross-checking results."
     },
     {
       icon: <FactCheckIcon />,
@@ -55,14 +55,14 @@ const BarChartIcon = () => (
       solution: "Let our experts—powered by advanced technology—instantly identify only the right companies for you."
     },
     {
-      icon: <HowToVoteIcon />,
-      problem: "Worried about missing hidden gems?",
-      solution: "With expert led searches delivering 2.7x more companies, we guarantee exhaustive visibility—ensuring no valuable opportunities slip through."
-    },
-    {
       icon: <FindInPageIcon />,
       problem: "Feel some countries are black holes for company info?",
       solution: "If a business has any digital presence, we'll find it—even in markets with limited public data."
+    },
+    {
+      icon: <HowToVoteIcon />,
+      problem: "Worried about missing hidden gems?",
+      solution: "With expert led searches delivering 2x to 6x more companies, we guarantee exhaustive visibility—ensuring no valuable opportunities slip through."
     },
     {
       icon: <BarChartIcon />,
@@ -85,7 +85,7 @@ export default function ProblemsSection() {
                                 Why Pulse beat <em className="underline">DIY?</em>
         </h2>
                             <p className="font-['Space_Grotesk'] font-normal text-[#333333] text-lg">
-                                Doing it yourself means hours of Googling, cross-checking, and second-guessing. Pulse turns that chaos into clarity, instantly.
+                            Tired of ChatGPT giving you the same 50 pharma API manufacturers you already know, or wasting hours on Google and incomplete databases? Pulse cuts through the noise—delivering instant clarity.
         </p>
       </div>
                     </div>

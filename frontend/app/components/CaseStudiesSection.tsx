@@ -42,15 +42,15 @@ const MapIcon = () => (
 );
 
 const LeftArrowIcon = () => (
-  <svg className="size-5" fill="none" viewBox="0 0 20 20">
-    <path d="M11.9108 4.41081C12.2362 4.08537 12.7638 4.08537 13.0892 4.41081C13.4146 4.73624 13.4146 5.26376 13.0892 5.58919L8.67838 10L13.0892 14.4108L13.1462 14.4743C13.4131 14.8016 13.3943 15.2841 13.0892 15.5892C12.7841 15.8943 12.3016 15.9131 11.9743 15.6462L11.9108 15.5892L6.91081 10.5892C6.58537 10.2638 6.58537 9.73624 6.91081 9.41081L11.9108 4.41081Z" fill="white" />
-  </svg>
+    <svg className="size-5" fill="none" viewBox="0 0 20 20">
+        <path d="M11.9108 4.41081C12.2362 4.08537 12.7638 4.08537 13.0892 4.41081C13.4146 4.73624 13.4146 5.26376 13.0892 5.58919L8.67838 10L13.0892 14.4108L13.1462 14.4743C13.4131 14.8016 13.3943 15.2841 13.0892 15.5892C12.7841 15.8943 12.3016 15.9131 11.9743 15.6462L11.9108 15.5892L6.91081 10.5892C6.58537 10.2638 6.58537 9.73624 6.91081 9.41081L11.9108 4.41081Z" fill="white" />
+    </svg>
 );
 
 const RightArrowIcon = () => (
-  <svg className="size-5" fill="none" viewBox="0 0 20 20">
-    <path d="M8.08919 4.41081C7.76375 4.08537 7.23624 4.08537 6.91081 4.41081C6.58537 4.73624 6.58537 5.26376 6.91081 5.58919L11.3216 10L6.91081 14.4108L6.85384 14.4743C6.58688 14.8016 6.60571 15.2841 6.91081 15.5892C7.2159 15.8943 7.6984 15.9131 8.02571 15.6462L8.08919 15.5892L13.0892 10.5892C13.4146 10.2638 13.4146 9.73624 13.0892 9.41081L8.08919 4.41081Z" fill="white" />
-  </svg>
+    <svg className="size-5" fill="none" viewBox="0 0 20 20">
+        <path d="M8.08919 4.41081C7.76375 4.08537 7.23624 4.08537 6.91081 4.41081C6.58537 4.73624 6.58537 5.26376 6.91081 5.58919L11.3216 10L6.91081 14.4108L6.85384 14.4743C6.58688 14.8016 6.60571 15.2841 6.91081 15.5892C7.2159 15.8943 7.6984 15.9131 8.02571 15.6462L8.08919 15.5892L13.0892 10.5892C13.4146 10.2638 13.4146 9.73624 13.0892 9.41081L8.08919 4.41081Z" fill="white" />
+    </svg>
 );
 
 // Interface definitions
@@ -88,18 +88,18 @@ const caseStudies: CaseStudy[] = [
     title: "Smart M&A Targeting for United Clinics — Poland's Dental Market",
     stats: [
       {
-        value: "22k+",
-        label: "Clinics Identified",
+        value: "",
+        label: "22,000+ Clinics Identified",
         description: "Web scraping + registry mining",
       },
       {
-        value: "900",
-        label: "Validated Targets",
-        description: "Delivered in",
+        value: "",
+        label: "900 Precisely Validated Acquisition Targets",
+        description: "",
       },
       {
-        value: "2",
-        label: "Acquisitions closed in 30 days",
+        value: "",
+        label: "2 Acquisitions closed in 30 days",
         description: "10x faster than Traditional Consulting",
       },
     ],
@@ -389,14 +389,14 @@ const CaseStudiesSection = () => {
     <div className="bg-primary-green text-white px-4 py-20 relative overflow-hidden">
         {/* Top-Left Decorator */}
         <div className="absolute top-0 left-0 w-3/4 h-auto z-0 opacity-50">
-            <Image
-                src="/assets/left-pattern.svg"
-                alt="Decorative pattern"
-                layout="responsive"
+        <Image
+          src="/assets/left-pattern.svg"
+          alt="Decorative pattern"
+          layout="responsive"
                 width={971}
-                height={412}
-            />
-        </div>
+          height={412}
+        />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
@@ -438,41 +438,38 @@ const CaseStudiesSection = () => {
                 <div className="flex items-center justify-start lg:justify-center gap-4 min-w-[1200px] px-4">
                   {/* Card 1 */}
                   <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
-                    <h3 className="font-space-grotesk text-2xl font-medium text-[#c4e538] uppercase">
+                    <h3 className="font-space-grotesk text-2xl font-medium text-[#d0f030] uppercase">
                       {study.stats?.[0].label}
                     </h3>
-                    <p className="font-space-grotesk text-lg">
+                    <p className="font-space-grotesk text-lg text-white mt-2 text-center">
                       {study.stats?.[0].description}
                     </p>
-                    <h3 className="font-space-grotesk text-7xl font-medium text-white uppercase">
-                      {study.stats?.[0].value}
-                    </h3>
                   </div>
 
                   {/* Connecting graphic */}
-                  <div className="h-full relative shrink-0 w-[72px]">
+            <div className="h-full relative shrink-0 w-[72px]">
                     <svg className="block size-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 72 435">
                       <path d="M72 28.0005H50.3945C42.6629 28.0007 36.3948 34.2688 36.3945 42.0005V164.42C39.6945 160.342 44.7396 157.733 50.3945 157.733H72V161.733H50.3945C42.6629 161.733 36.3948 168.001 36.3945 175.733V201.415C36.3945 208.381 32.4356 214.423 26.6455 217.415C32.4357 220.406 36.3944 226.448 36.3945 233.415V259.096C36.3945 266.828 42.6627 273.096 50.3945 273.096H72V277.096H50.3945C44.7394 277.096 39.6944 274.488 36.3945 270.409V393C36.3945 400.731 42.6627 406.999 50.3945 407H72V411H50.3945C40.4536 410.999 32.3945 402.941 32.3945 393V233.415C32.3943 225.804 26.3207 219.611 18.7559 219.419L18.3945 219.415H0V215.415H18.3945L18.7559 215.411C26.3209 215.219 32.3945 209.026 32.3945 201.415V42.0005C32.3948 32.0597 40.4537 24.0007 50.3945 24.0005H72V28.0005Z" fill="url(#paint1_linear_397_51212)"/>
-                      <defs>
+                <defs>
                         <linearGradient id="paint1_linear_397_51212" x1="72" x2="0" y1="217.5" y2="217.5" gradientUnits="userSpaceOnUse">
                           <stop stopColor="#192C28"/><stop offset="0.8" stopColor="#C4E538"/><stop offset="1" stopColor="#192C28"/>
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
 
                   {/* Info Cards */}
-                  <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
+            <div className="flex flex-col gap-4 flex-shrink-0 h-[438px] justify-between">
                     {study.infoCards.slice(0, 4).map((card, idx) => (
                       <div key={idx} className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex items-center gap-4 w-64 h-20 shadow-lg">
                         <div className="relative shrink-0 size-8">{card.icon}</div>
                         <span className="font-space-grotesk text-lg leading-tight">{card.text}</span>
                       </div>
                     ))}
-                  </div>
+            </div>
 
                   {/* Connecting graphic */}
-                  <div className="h-full relative shrink-0 w-[74.012px]">
+            <div className="h-full relative shrink-0 w-[74.012px]">
                     <svg className="block size-full" fill="none" preserveAspectRatio="xMidYMid meet" viewBox="0 0 75 435">
                       <path d="M74.0098 28H38.4062V150.64C38.4062 152.582 38.7994 153.869 39.3555 154.752C39.9026 155.62 40.7146 156.268 41.8672 156.752C44.3229 157.784 47.8942 157.925 52.4062 157.925H74.0117V161.925H52.4062C48.0817 161.925 43.6525 161.841 40.3174 160.439C39.6423 160.156 38.9996 159.813 38.4023 159.401V201.331H38.6172V259.105C38.6172 260.053 38.5436 260.984 38.4023 261.893V393C38.4021 402.941 30.3433 411 20.4023 411H0.0078125V407H20.4023C28.1342 407 34.4021 400.732 34.4023 393V270.678C31.1004 274.607 26.1511 277.105 20.6172 277.105H0.0117188V273.105H20.6172C27.5118 273.105 33.242 268.121 34.4023 261.56V128.571H34.4062V28H0V24H74.0098V28Z" fill="url(#paint2_linear_397_51151)"/>
                       <defs>
@@ -489,29 +486,28 @@ const CaseStudiesSection = () => {
                       <div key={idx} className="bg-[#192c28] border border-[#c4e538] rounded-lg p-4 flex items-center gap-4 w-64 h-20 shadow-lg">
                         <div className="relative shrink-0 size-8">{card.icon}</div>
                         <span className="font-space-grotesk text-lg leading-tight">{card.text}</span>
-                      </div>
+                </div>
                     ))}
                     <div className="bg-[#c4e538] text-black border border-[#192c28] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-44 shadow-lg">
-                      <p className="font-space-grotesk text-lg text-[#333333]">{study.stats?.[1].description}</p>
                       <h3 className="font-space-grotesk text-2xl font-medium text-[#141414] uppercase">
-                        <span className="text-5xl">{study.stats?.[1].value}</span> {study.stats?.[1].label}
+                        {study.stats?.[1].label}
                       </h3>
+                      <p className="font-space-grotesk text-lg text-[#333333] mt-2 text-center">
+                        {study.stats?.[1].description}
+                      </p>
                     </div>
                   </div>
 
                   {/* Final card */}
-                  <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
-                    <h3 className="font-space-grotesk text-2xl font-medium text-[#c4e538] uppercase">
-                      {study.stats?.[2].label}
-                    </h3>
-                    <p className="font-space-grotesk text-lg">
-                      {study.stats?.[2].description}
-                    </p>
-                    <h3 className="font-space-grotesk text-7xl font-medium text-white uppercase">
-                      {study.stats?.[2].value}
-                    </h3>
-                  </div>
-                </div>
+            <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
+              <h3 className="font-space-grotesk text-2xl font-medium text-[#d0f030] uppercase">
+                {study.stats?.[2].label}
+              </h3>
+              <p className="font-space-grotesk text-lg text-white mt-2 text-center">
+                {study.stats?.[2].description}
+              </p>
+            </div>
+          </div>
               )}
 
               {study.type === "detailed" && (
@@ -613,17 +609,17 @@ const CaseStudiesSection = () => {
             </>
           )}
         </div>
-
+        
         {/* Navigation */}
         {!isMobile && (
-          <div className="flex flex-row gap-6 items-center justify-center mt-10">
-            <button onClick={handlePrev} className="bg-[#21413c] rounded-full p-4 transition-opacity hover:opacity-80 disabled:opacity-40">
-              <LeftArrowIcon />
-            </button>
-            <button onClick={handleNext} className="bg-[#21413c] rounded-full p-4 transition-opacity hover:opacity-80 disabled:opacity-40">
-              <RightArrowIcon />
-            </button>
-          </div>
+        <div className="flex flex-row gap-6 items-center justify-center mt-10">
+          <button onClick={handlePrev} className="bg-[#21413c] rounded-full p-4 transition-opacity hover:opacity-80 disabled:opacity-40">
+            <LeftArrowIcon />
+          </button>
+          <button onClick={handleNext} className="bg-[#21413c] rounded-full p-4 transition-opacity hover:opacity-80 disabled:opacity-40">
+            <RightArrowIcon />
+          </button>
+        </div>
         )}
       </div>
     </div>

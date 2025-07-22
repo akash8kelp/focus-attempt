@@ -30,7 +30,8 @@ export default function CTASection({ onStartSearch }: CTASectionProps) {
             Start Screening.
             </h2>
           <p className="text-base text-gray-300">
-              Get a free sample of a real Pulse company report. See how we break down business models, risk signals, and growth insights — in a format built for fast decision-making.
+          Get a free Pulse report sample.
+          Explore how we break down strategy, risks, and growth—and deliver full company lists with detailed profiles and every datapoint in one go.
             </p>
           <button 
             onClick={onStartSearch}

@@ -347,7 +347,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
           </div>
 
           {/* Form - Scrollable */}
-          <div className="flex-1 overflow-y-auto py-6">
+          <div className="flex-1 overflow-y-auto py-6 custom-scrollbar">
             <div className="flex flex-col gap-10">
               {currentStep === 1 && (
                   <>

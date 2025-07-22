@@ -12,27 +12,37 @@ interface HeroSectionProps {
   brightnessBottom?: number; // Brightness at the bottom (0 to 1)
 }
 
-export default function HeroSection({ onStartSearch, blur: targetBlur = 9, brightnessTop = 0.5, brightnessBottom = 0.15 }: HeroSectionProps) {
+export default function HeroSection({ onStartSearch, blur: targetBlur = 7, brightnessTop = 0.6, brightnessBottom = 0.15 }: HeroSectionProps) {
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
   const [currentBlur, setCurrentBlur] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   useEffect(() => {
     const animationDuration = 2000; // 2 seconds
     const startTime = Date.now();
 
-    const animateBlur = () => {
+    const animate = () => {
       const elapsedTime = Date.now() - startTime;
       const progress = Math.min(elapsedTime / animationDuration, 1);
-      const newBlur = progress * targetBlur;
       
+      const newBlur = progress * targetBlur;
       setCurrentBlur(newBlur);
 
       if (progress < 1) {
-        requestAnimationFrame(animateBlur);
+        requestAnimationFrame(animate);
       }
     };
 
-    requestAnimationFrame(animateBlur);
+    requestAnimationFrame(animate);
   }, [targetBlur]);
 
   const openReportDialog = () => setIsReportDialogOpen(true);
@@ -72,8 +82,10 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 9, brigh
               <h1 className="hero-title text-4xl md:text-5xl lg:text-hero leading-hero text-center text-text-primary w-full">
                 Unlock Hidden Opportunities, <span className="italic text-[#c4e538]">Globally</span>
               </h1>
-              <p className="font-space-grotesk text-base md:text-lg lg:text-body leading-body text-center text-text-secondary w-full">
-                Access 2.7x more companies than traditional static databases—including opaque markets—through detailed, AI-powered company profiles curated by an expert-led team.
+              <p className="font-space-grotesk font-medium text-[1rem] md:text-[1.125rem] lg:text-body leading-[1.93rem] tracking-wide text-center text-text-secondary w-full max-w-[700px]">
+                <span className={`${!isMobile ? 'bg-background-glass backdrop-blur-20' : ''} box-decoration-clone px-2 py-1 rounded-md`}>
+                  Expert-led service delivering 2x–6x more companies than traditional static databases. Get AI-powered, detailed company profiles tailored to any business activity and geography of your choice —in just 4 days.
+                </span>
               </p>
             </div>
             <CTAButtons onStartSearch={onStartSearch} onDownloadReport={openReportDialog} />

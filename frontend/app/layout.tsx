@@ -16,7 +16,7 @@ const grotesk = Space_Grotesk({
 
 export const metadata = {
   title: 'Pulse - Unlock Hidden Opportunities, Globally',
-  description: 'Access 2.7x more companies than traditional static databases—including opaque markets—through detailed, AI-powered company profiles curated by an expert-led team.',
+  description: 'Access 2x to 6x more companies than traditional databases — based on the latest data across all countries. Experience unmatched depth and accuracy in company intelligence, powered by expert curation and advanced AI.',
 }
 
 export default function RootLayout({
