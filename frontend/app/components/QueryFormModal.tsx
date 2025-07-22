@@ -356,7 +356,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                       <label className="text-sm font-medium text-[#192C28] font-space-grotesk">What business activity are you interested in?</label>
                       <input 
                         type="text"
-                        placeholder="e.g., HR Software Companies, home surveillance companies, etc."
+                        placeholder="e.g., HR Software Companies, Home Surveillance Companies, etc."
                         value={businessActivity}
                         onChange={(e) => handleFieldChange('businessActivity', e.target.value, setBusinessActivity)}
                         className={getFieldClassName('businessActivity')}
