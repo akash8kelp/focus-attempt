@@ -52,7 +52,7 @@ const BarChartIcon = () => (
     {
       icon: <FactCheckIcon />,
       problem: "Irritated checking every company manually?",
-      solution: "Let our experts—powered by advanced technology—instantly identify only the right companies for you."
+      solution: "Our experts, backed by advanced tech, instantly pinpoint the right companies. Each company we recommend comes with a detailed, one-page summary to eliminate any guesswork."
     },
     {
       icon: <FindInPageIcon />,
