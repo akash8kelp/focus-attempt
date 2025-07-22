@@ -92,23 +92,21 @@ export default function ProblemsSection() {
 
                     <div className="flex flex-col md:flex-row gap-4 md:overflow-x-auto w-full pb-4 md:[-ms-overflow-style:none] md:[scrollbar-width:none] md:[&::-webkit-scrollbar]:hidden">
                         {problems.map((item, index) => (
-                             <div key={index} className="bg-[#e1f0df] flex-col h-[340px] flex items-start justify-between p-8 rounded-lg shrink-0 w-full md:w-[480px]">
-                                <div className="bg-[#21413c] p-4 rounded-lg">
+                             <div key={index} className="grid h-[340px] grid-rows-[auto_auto_1fr] grid-cols-1 bg-[#e1f0df] p-8 rounded-lg shrink-0 w-full md:w-[480px] gap-y-6">
+                                <div className="bg-[#21413c] p-4 rounded-lg w-fit">
                                     {item.icon}
                                 </div>
-                                <div className="flex flex-col gap-6 items-start text-left">
-                                    <h3 className="font-['Space_Grotesk'] font-medium text-xl text-[#141414]">
-                                        {item.problem}
-                                    </h3>
-                                    <p className="font-['Space_Grotesk'] font-normal text-base text-[#142420]">
-                        {item.solution}
-                      </p>
-                  </div>
+                                <h3 className="font-['Space_Grotesk'] font-medium text-xl text-[#141414]">
+                                    {item.problem}
+                                </h3>
+                                <p className="font-['Space_Grotek'] font-normal text-base text-[#142420] self-end">
+                                    {item.solution}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-              ))}
-          </div>
-        </div>
-      </div>
-    </section>
+            </div>
+        </section>
     );
 } 

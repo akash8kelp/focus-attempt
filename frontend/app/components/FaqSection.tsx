@@ -4,11 +4,11 @@ import Image from 'next/image';
 const faqData = [
   {
     question: "What exactly does Pulse do?",
-    answer: "Pulkse combines AI with Scan Experts to perform exhaustive searches, delivering detailed intelligence on any company in any industry worldwide. This allows you to make fast, informed, and confident business decisions without the time-consuming research."
+    answer: "Pulse combines AI with Scan Experts to perform exhaustive searches, delivering detailed intelligence on any company in any industry worldwide. This allows you to make fast, informed, and confident business decisions without the time-consuming research."
   },
   {
     question: "Who is this service for?",
-    answer: "Our service is designed for high-stakes teams, including M&A professionals, corporate strategists, corporate client discovery, and market researchers who need speed, clarity, and accuracy."
+    answer: "Our service is designed for high-stakes teams—M&A professionals, corporate strategists, client discovery teams, and market researchers—who need fast, clear, and accurate insights."
   },
   {
     question: "How long does it take to get results?",
@@ -92,7 +92,7 @@ export default function FaqSection() {
               <div
                 className="font-space-grotesk font-normal relative shrink-0 text-[#333333] text-sm lg:text-base tracking-[0.64px] uppercase w-full"
               >
-                <p className="block leading-[1.2]">SMart AI faqs</p>
+                <p className="block leading-[1.2]">FAQs</p>
               </div>
               <div
                 className="font-instrument-serif not-italic relative shrink-0 text-[#141414] text-4xl md:text-5xl lg:text-[64px] w-full"
