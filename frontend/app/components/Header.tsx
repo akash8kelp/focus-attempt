@@ -18,16 +18,10 @@ const Header = ({ onStartSearch }: { onStartSearch: () => void }) => {
             href="https://kelp.kelpglobal.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-block font-space-grotesk text-sm text-white hover:text-primary-lime transition-colors font-bold"
+            className="font-space-grotesk text-sm text-white hover:text-primary-lime transition-colors font-bold"
           >
             Sign In
           </a>
-          <button 
-            onClick={onStartSearch}
-            className="md:hidden font-space-grotesk text-sm text-white bg-primary-lime text-primary-green py-2 px-4 rounded-full"
-          >
-            Start
-          </button>
         </div>
       </div>
     </header>
