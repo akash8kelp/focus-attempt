@@ -27,7 +27,7 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brigh
   }, []);
 
   useEffect(() => {
-    const animationDuration = 2000; // 2 seconds
+    const animationDuration = 1000; // 1 second
     const startTime = Date.now();
 
     const animate = () => {
