@@ -42,7 +42,7 @@ export default function CTAButtons({ onStartSearch, onDownloadReport }: CTAButto
       <button onClick={onDownloadReport} className="flex items-center justify-center w-full sm:w-auto h-12 px-6 py-2 bg-white bg-opacity-10 rounded text-white
                          hover:bg-opacity-20 active:bg-opacity-25 transition-all duration-300">
         <span className="font-space-grotesk text-base font-medium">
-          Free Sample Reports
+          Free Sample Report
         </span>
       </button>
     </div>

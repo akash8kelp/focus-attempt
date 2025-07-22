@@ -82,7 +82,7 @@ export default function ProblemsSection() {
           problems we're solving
         </p>
                             <h2 className="font-['Instrument_Serif'] text-4xl md:text-6xl text-[#142420]">
-                                Why Pulse beat <em className="underline">DIY?</em>
+                                Why Pulse beats <em className="underline">DIY?</em>
         </h2>
                             <p className="font-['Space_Grotesk'] font-normal text-[#333333] text-lg">
                             Tired of ChatGPT giving you the same 50 pharma API manufacturers you already know, or wasting hours on Google and incomplete databases? Pulse cuts through the noise—delivering instant clarity.
