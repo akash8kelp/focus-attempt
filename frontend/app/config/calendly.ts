@@ -20,59 +20,17 @@ export const calendlyClientConfig = {
     utmCampaign: 'company-scan-booking',
     utmContent: 'step3-widget'
   },
-
-  // Prefill settings
-  prefill: {
-    customQuestions: {
-      a1: '', // Will be populated with business activity
-      a2: '', // Will be populated with selected country  
-      a3: '', // Will be populated with sectors
-    }
-  }
-};
-
-// Function to generate Calendly URL with prefills
-export const generateCalendlyUrl = (formData: any) => {
-  const baseUrl = calendlyClientConfig.embedUrl;
-  const params = new URLSearchParams();
-
-  // Add form data as prefills
-  if (formData.name) {
-    params.append('name', formData.name);
-  }
-  
-  if (formData.organization) {
-    params.append('a1', `Organization: ${formData.organization}`);
-  }
-
-  if (formData.businessActivity) {
-    params.append('a2', `Business Activity: ${formData.businessActivity}`);
-  }
-
-  if (formData.sectors) {
-    params.append('a3', `Sectors: ${formData.sectors}`);
-  }
-
-  // Add UTM parameters
-  Object.entries(calendlyClientConfig.utm).forEach(([key, value]) => {
-    params.append(key, value);
-  });
-
-  return `${baseUrl}?${params.toString()}`;
 };
 
 // Widget configuration for inline embedding
 export const getWidgetConfig = (formData: any) => ({
-  url: generateCalendlyUrl(formData),
+  url: calendlyClientConfig.embedUrl,
   styles: {
-    height: '500px'
+    height: '100%',
+    minWidth: '320px',
   },
-  hideEventTypeDetails: false,
-  hideLandingPageDetails: true,
   pageSettings: {
-    primaryColor: '192C28', // Your brand green
-    textColor: '141414',
-    backgroundColor: 'ffffff',
+    ...calendlyClientConfig.widget,
   },
   prefill: {
     name: formData.name || '',

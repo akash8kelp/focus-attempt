@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { InlineWidget, useCalendlyEventListener } from 'react-calendly'
 import { calendlyApi, formApi, UpdateSubmissionPayload } from '../utils/api'
@@ -22,6 +22,8 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
   const [availabilityData, setAvailabilityData] = useState<any>(null)
   const [submissionId, setSubmissionId] = useState<string | null>(null)
   const [showWaitlistConfirmation, setShowWaitlistConfirmation] = useState(false)
+  const [showBookingConfirmation, setShowBookingConfirmation] = useState(false)
+  const [isBookingComplete, setIsBookingComplete] = useState(false)
   
   // Step 1 form data
   const [businessActivity, setBusinessActivity] = useState('')
@@ -173,11 +175,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
           };
         }
         await formApi.updateSubmission(submissionId, payload);
-        if (availabilityData?.available) {
-          handleClose(); // Or move to a different confirmation screen if needed
-        } else {
-          setShowWaitlistConfirmation(true);
-        }
+        setIsBookingComplete(true) // Triggers widget removal
       } catch (error) {
         console.error('Error on step 3 submission:', error);
       }
@@ -188,7 +186,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
     setShowValidationErrors(true);
   }
 
-  const handleEventScheduled = async (e: any) => {
+  const handleEventScheduled = useCallback(async (e: any) => {
     if (e.data.payload.event.uri && submissionId) {
       try {
         const payload: UpdateSubmissionPayload = {
@@ -197,13 +195,20 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
           step_data: { calendly_event_uri: e.data.payload.event.uri }
         };
         await formApi.updateSubmission(submissionId, payload);
-        handleClose(); // Close modal on success
+        setIsBookingComplete(true) // Triggers widget removal
       } catch (error) {
         console.error('Error updating submission after Calendly booking:', error);
         // Optionally, show an error message to the user
       }
     }
-  };
+  }, [submissionId]);
+
+  useEffect(() => {
+    if (isBookingComplete) {
+      // This runs after the state update has removed the widget from the DOM
+      setShowBookingConfirmation(true);
+    }
+  }, [isBookingComplete]);
 
   useCalendlyEventListener({
     onEventScheduled: handleEventScheduled,
@@ -242,6 +247,8 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
     setPreferredTimeWindow('')
     setIsTimeSensitive(false)
     setShowWaitlistConfirmation(false)
+    setShowBookingConfirmation(false)
+    setIsBookingComplete(false)
     onClose()
   }
 
@@ -255,10 +262,6 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
   });
 
   if (!isOpen) return null
-  
-  if (showWaitlistConfirmation) {
-    return <WaitlistConfirmation onClose={handleClose} />;
-  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -277,11 +280,11 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
             className="opacity-70"
           />
         </button>
-
+        
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col px-4 sm:px-8 md:px-[120px] overflow-y-auto">
+        <div className="relative z-10 h-full flex flex-col overflow-hidden">
           {/* Header - Fixed */}
-          <div className="flex-shrink-0 pt-10 pb-6">
+          <div className="flex-shrink-0 pt-10 pb-6 px-4 sm:px-8 md:px-[120px]">
             {/* Title Section */}
             <div className="flex items-center justify-between mb-8">
               <div className="flex-1 flex flex-col gap-4">
@@ -346,10 +349,40 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
             </div>
           </div>
 
-          {/* Form - Scrollable */}
-          <div className="flex-1 overflow-y-auto py-6 custom-scrollbar">
-            <div className="flex flex-col gap-10">
-              {currentStep === 1 && (
+          {/* Body - Conditionally Rendered */}
+          <div className="flex-1 flex flex-col overflow-y-auto px-4 sm:px-8 md:px-[120px] custom-scrollbar">
+            {showBookingConfirmation ? (
+              <div className="w-full h-full grid place-items-center">
+                <div className="flex flex-col items-center justify-center text-center gap-6">
+                  <CheckIcon />
+                  <h3 className="text-xl md:text-2xl font-space-grotesk text-[#141414]">
+                    Booking Confirmed!
+                  </h3>
+                  <p className="text-sm md:text-base font-space-grotesk text-[#333333]">
+                    Your meeting has been scheduled. You will receive a confirmation email shortly.
+                  </p>
+                </div>
+              </div>
+            ) : showWaitlistConfirmation ? (
+              <div className="w-full h-full grid place-items-center">
+                <div className="flex flex-col items-center justify-center text-center gap-6">
+                  <div className="w-16 h-16 bg-[#c4e538] rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-[#192c28]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h2 className="font-instrument-serif text-3xl md:text-4xl">
+                    You're on the list!
+                  </h2>
+                  <p className="font-space-grotesk text-base text-black/80 max-w-sm">
+                    Thanks for your interest! We've received your details and will get back to you within your preferred time window.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              // Form Content
+              <div className="flex flex-col gap-10 py-6">
+                {currentStep === 1 && (
                   <>
                     {/* Business Activity and Country */}
                     <div className="flex flex-col gap-2">
@@ -371,8 +404,8 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                       />
                     </div>
                   </>
-              )}
-              {currentStep === 2 && (
+                )}
+                {currentStep === 2 && (
                   <>
                     {/* Your Name Field */}
                     <div className="flex flex-col gap-4">
@@ -477,8 +510,8 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                     {/* Sectors */}
                     <InputField id="sectors" label="What sectors are you interested in? (Optional)" placeholder="e.g., SaaS, FinTech, Healthcare" value={sectors} onChange={(e) => handleFieldChange('sectors', e.target.value, setSectors)} error={hasFieldError('sectors')} />
                   </>
-              )}
-              {currentStep === 3 && (
+                )}
+                {currentStep === 3 && !isBookingComplete && (
                   <>
                     {isCheckingAvailability ? (
                         // Loading state while checking availability
@@ -501,7 +534,7 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                           </div>
                           
                           {/* Real Calendly Widget */}
-                          <div className="w-full min-h-[400px] md:min-h-[500px] border border-[#E6E6E6] rounded-lg overflow-hidden">
+                          <div className="w-full h-[500px] border border-[#E6E6E6] rounded-lg overflow-hidden">
                             <InlineWidget
                               url={widgetConfig.url}
                               styles={widgetConfig.styles}
@@ -595,97 +628,67 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                         </div>
                     )}
                   </>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
 
+
           {/* Footer Buttons - Fixed */}
-          <div className="flex-shrink-0 flex justify-between items-center pt-6 pb-10 border-t border-[#E6E6E6]">
+          {!showBookingConfirmation && !showWaitlistConfirmation && (
+            <div className="flex-shrink-0 flex justify-between items-center pt-6 pb-10 border-t border-[#E6E6E6] px-4 sm:px-8 md:px-[120px]">
+                <button
+                  onClick={handleBack}
+                  disabled={currentStep === 1}
+                  className={`h-12 px-4 rounded text-sm font-space-grotesk font-medium leading-[1.28] ${
+                    currentStep === 1 
+                      ? 'bg-[#E6E6E6] text-[#192C28] opacity-50 cursor-not-allowed' 
+                      : 'bg-[#E6E6E6] text-[#192C28] hover:bg-[#d6d6d6] transition-colors'
+                  }`}
+                >
+                  Back
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={
+                    (currentStep === 1 && !isStep1Valid()) || 
+                    (currentStep === 2 && !isStep2Valid()) ||
+                    (currentStep === 3 && !isStep3Valid()) ||
+                    isCheckingAvailability
+                  }
+                  className={`h-12 px-4 rounded text-sm font-space-grotesk font-medium transition-colors leading-[1.28] ${
+                    (currentStep === 1 && !isStep1Valid()) || 
+                    (currentStep === 2 && !isStep2Valid()) ||
+                    (currentStep === 3 && !isStep3Valid()) ||
+                    isCheckingAvailability
+                      ? 'bg-[#E6E6E6] text-[#999999] cursor-not-allowed'
+                      : 'bg-[#333333] text-white hover:bg-[#192C28]'
+                  }`}
+                >
+                  {isCheckingAvailability 
+                    ? 'Checking...' 
+                    : currentStep === 3 
+                      ? (availabilityData?.available ? 'Complete Booking' : 'Join Waiting List')
+                      : 'Next'
+                  }
+                </button>
+            </div>
+          )}
+          { (showBookingConfirmation || showWaitlistConfirmation) && (
+            <div className="flex-shrink-0 flex justify-center items-center pt-6 pb-10 border-t border-[#E6E6E6] px-4 sm:px-8 md:px-[120px]">
               <button
-                onClick={handleBack}
-                disabled={currentStep === 1}
-                className={`h-12 px-4 rounded text-sm font-space-grotesk font-medium leading-[1.28] ${
-                  currentStep === 1 
-                    ? 'bg-[#E6E6E6] text-[#192C28] opacity-50 cursor-not-allowed' 
-                    : 'bg-[#E6E6E6] text-[#192C28] hover:bg-[#d6d6d6] transition-colors'
-                }`}
+                onClick={handleClose}
+                className="h-12 px-8 rounded text-sm bg-[#333333] text-white hover:bg-[#192C28] font-space-grotesk font-medium transition-colors"
               >
-                Back
+                Done
               </button>
-              <button
-                onClick={handleNext}
-                disabled={
-                  (currentStep === 1 && !isStep1Valid()) || 
-                  (currentStep === 2 && !isStep2Valid()) ||
-                  (currentStep === 3 && !isStep3Valid()) ||
-                  isCheckingAvailability
-                }
-                className={`h-12 px-4 rounded text-sm font-space-grotesk font-medium transition-colors leading-[1.28] ${
-                  (currentStep === 1 && !isStep1Valid()) || 
-                  (currentStep === 2 && !isStep2Valid()) ||
-                  (currentStep === 3 && !isStep3Valid()) ||
-                  isCheckingAvailability
-                    ? 'bg-[#E6E6E6] text-[#999999] cursor-not-allowed'
-                    : 'bg-[#333333] text-white hover:bg-[#192C28]'
-                }`}
-              >
-                {isCheckingAvailability 
-                  ? 'Checking...' 
-                  : currentStep === 3 
-                    ? (availabilityData?.available ? 'Complete Booking' : 'Join Waiting List')
-                    : 'Next'
-                }
-              </button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   )
 }
-
-const WaitlistConfirmation = ({ onClose }: { onClose: () => void }) => {
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-      <div className="relative w-full max-w-lg bg-[#192c28] rounded-2xl shadow-lg flex flex-col items-center text-center p-8 md:p-12 text-white">
-        <button 
-          onClick={onClose}
-          className="absolute top-4 right-4 z-50 w-8 h-8 flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors rounded-full"
-        >
-          <Image 
-            src="/assets/query-form/close-icon.svg" 
-            alt="Close" 
-            width={16} 
-            height={16}
-            className="filter-none invert"
-          />
-        </button>
-
-        <div className="w-16 h-16 bg-[#c4e538] rounded-full flex items-center justify-center mb-6">
-          <svg className="w-8 h-8 text-[#192c28]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        
-        <h2 className="font-instrument-serif text-3xl md:text-4xl mb-4">
-          You're on the list!
-        </h2>
-        
-        <p className="font-space-grotesk text-base text-white/80 mb-8 max-w-sm">
-          Thanks for your interest! We've received your details and will get back to you within your preferred time window.
-        </p>
-        
-        <button
-          onClick={onClose}
-          className="bg-[#c4e538] cursor-pointer h-12 relative rounded px-6 flex items-center justify-center gap-2 group transition-all hover:gap-3"
-        >
-          <span className="font-space-grotesk font-medium text-[#192c28] text-sm">
-            Got it, thanks!
-          </span>
-        </button>
-      </div>
-    </div>
-  );
-};
 
 // Reusable InputField component
 const InputField = ({ id, label, placeholder, value, onChange, error, required = false }: { id: string, label: string, placeholder: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, error: boolean, required?: boolean }) => (
