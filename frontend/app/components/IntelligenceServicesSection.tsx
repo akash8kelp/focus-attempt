@@ -14,7 +14,7 @@ const services: Service[] = [
     {
       title: "Get access to enriched company lists",
       description: "One view to rule them all — websites, financials, employee data, LinkedIn, and past deals, scored and ready.",
-      videoUrl: "/assets/is4.mp4",
+      videoUrl: "/assets/is4new.mp4",
       darkCard: true,
     },
     {

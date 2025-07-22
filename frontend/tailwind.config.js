@@ -59,13 +59,14 @@ module.exports = {
         '160': '160px'
       },
       animation: {
-        marquee: 'marquee 20s linear infinite',
+        marquee: 'marquee 10s linear infinite',
+        'marquee-desktop': 'marquee 25s linear infinite',
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' },
-        }
+          '100%': { transform: 'translateX(-100%)' },
+        },
       },
       backgroundImage: {
         'hero-gradient': 'linear-gradient(to bottom, rgba(9, 9, 11, 0.95) 0%, rgba(9, 9, 11, 0.2) 100%)',

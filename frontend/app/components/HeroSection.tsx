@@ -12,7 +12,7 @@ interface HeroSectionProps {
   brightnessBottom?: number; // Brightness at the bottom (0 to 1)
 }
 
-export default function HeroSection({ onStartSearch, blur: targetBlur = 7, brightnessTop = 0.6, brightnessBottom = 0.15 }: HeroSectionProps) {
+export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brightnessTop = 0.7, brightnessBottom = 0.2 }: HeroSectionProps) {
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
   const [currentBlur, setCurrentBlur] = useState(0);
   const [isMobile, setIsMobile] = useState(false);

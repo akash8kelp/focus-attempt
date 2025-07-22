@@ -72,7 +72,7 @@ export default function SocialProof() {
         </h2>
       </div>
       <div className="relative w-full overflow-hidden group">
-        <div className="flex animate-marquee group-hover:pause">
+        <div className="flex animate-marquee md:animate-marquee-desktop group-hover:[animation-play-state:paused]">
           {[...logos, ...logos].map((logo, index) => (
             <LogoItem key={index} src={logo.src} alt={logo.name} />
           ))}
