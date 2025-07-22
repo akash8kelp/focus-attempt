@@ -435,16 +435,16 @@ const CaseStudiesSection = () => {
           ) : (
             <>
               {!study.type && (
-                <div className="flex items-center justify-start lg:justify-center gap-4 min-w-[1200px] px-4">
-                  {/* Card 1 */}
-                  <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
+          <div className="flex items-center justify-start lg:justify-center gap-4 min-w-[1200px] px-4">
+            {/* Card 1 */}
+            <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
                     <h3 className="font-space-grotesk text-2xl font-medium text-[#d0f030] uppercase">
                       {study.stats?.[0].label}
-                    </h3>
+              </h3>
                     <p className="font-space-grotesk text-lg text-white mt-2 text-center">
                       {study.stats?.[0].description}
-                    </p>
-                  </div>
+              </p>
+            </div>
 
                   {/* Connecting graphic */}
             <div className="h-full relative shrink-0 w-[72px]">
@@ -495,8 +495,8 @@ const CaseStudiesSection = () => {
                       <p className="font-space-grotesk text-lg text-[#333333] mt-2 text-center">
                         {study.stats?.[1].description}
                       </p>
-                    </div>
-                  </div>
+              </div>
+            </div>
 
                   {/* Final card */}
             <div className="bg-[#192c28] border border-[#c4e538] rounded-lg p-6 flex flex-col justify-center items-center text-center w-60 h-[438px] shadow-lg flex-shrink-0">
