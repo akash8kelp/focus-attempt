@@ -7,17 +7,17 @@ const Header = ({ onStartSearch }: { onStartSearch: () => void }) => {
       <div className="w-full mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Image
-            src="/assets/pulse-main-logo.svg" 
+            src="/assets/pulse-logo-231.png" 
             alt="Kelp Logo"
             width={150} 
             height={60}
           />
         </div>
         <a
-          href="https://kelp.kelpglobal.in"
+          href="https://kelp.kelpglobal.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-space-grotesk text-lg text-white hover:text-primary-lime transition-colors font-bold"
+          className="font-space-grotesk text-lg text-white hover:text-primary-lime transition-colors"
         >
           Sign In
         </a>

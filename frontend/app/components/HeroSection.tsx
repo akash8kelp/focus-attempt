@@ -12,28 +12,18 @@ interface HeroSectionProps {
   brightnessBottom?: number; // Brightness at the bottom (0 to 1)
 }
 
-export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brightnessTop = 0.7, brightnessBottom = 0.2 }: HeroSectionProps) {
+export default function HeroSection({ onStartSearch, brightnessTop = 0.5, brightnessBottom = 0.0 }: HeroSectionProps) {
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
-  const [currentBlur, setCurrentBlur] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const animationDuration = 1000; // 1 second
-    const startTime = Date.now();
-
-    const animate = () => {
-      const elapsedTime = Date.now() - startTime;
-      const progress = Math.min(elapsedTime / animationDuration, 1);
-      
-      const newBlur = progress * targetBlur;
-      setCurrentBlur(newBlur);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-
-    requestAnimationFrame(animate);
-  }, [targetBlur]);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   const openReportDialog = () => setIsReportDialogOpen(true);
   const closeReportDialog = () => setIsReportDialogOpen(false);
@@ -44,7 +34,7 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brigh
       <div 
         className="absolute inset-0 z-0 bg-contain bg-center" 
         style={{ 
-          backgroundImage: "url('/assets/world-map-new.svg')", 
+          backgroundImage: "url('/assets/map1.svg')", 
           backgroundRepeat: 'no-repeat',
         }}
       />
@@ -52,8 +42,6 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brigh
         className="absolute inset-0 z-10"
         style={{
           background: `linear-gradient(to bottom, rgba(0, 0, 0, ${brightnessTop}), rgba(0, 0, 0, ${brightnessBottom}))`,
-          backdropFilter: `blur(${currentBlur}px)`,
-          transition: 'backdrop-filter 2s ease-out',
         }}
       />
 
@@ -72,11 +60,11 @@ export default function HeroSection({ onStartSearch, blur: targetBlur = 8, brigh
               <h1 className="hero-title text-4xl md:text-5xl lg:text-hero leading-hero text-center text-text-primary w-full">
                 Unlock Hidden Opportunities, <span className="italic text-[#c4e538]">Globally</span>
               </h1>
-              <div className="font-space-grotesk font-medium text-[1rem] md:text-[1.125rem] lg:text-body leading-[1.93rem] tracking-wide text-center text-text-secondary w-full max-w-[700px]">
-                <div className="px-2 py-1 rounded-md">
+              <p className="font-space-grotesk text-[1rem] md:text-[1.125rem] lg:text-body leading-[1.93rem] tracking-wide text-center text-text-secondary w-full max-w-[700px]">
+                <span className="box-decoration-clone px-2 py-1 rounded-md">
                   Expert-led service delivering 2x–6x more companies than traditional static databases. Get AI-powered, detailed company profiles tailored to any business activity and geography of your choice —in just 4 days.
-                </div>
-              </div>
+                </span>
+              </p>
             </div>
             <CTAButtons onStartSearch={onStartSearch} onDownloadReport={openReportDialog} />
           </div>
