@@ -3,14 +3,14 @@ import Image from 'next/image';
 
 const Header = ({ onStartSearch }: { onStartSearch: () => void }) => {
   return (
-    <header className="absolute top-0 left-0 right-0 z-30 bg-transparent py-4 px-8">
+    <header className="absolute top-0 left-0 right-0 z-30 bg-transparent py-6 px-12">
       <div className="w-full mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Image
             src="/assets/pulse-logo-231.png" 
             alt="Kelp Logo"
-            width={150} 
-            height={60}
+            width={180} 
+            height={72}
           />
         </div>
         <a

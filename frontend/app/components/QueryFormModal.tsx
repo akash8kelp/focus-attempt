@@ -648,30 +648,32 @@ export default function QueryFormModal({ isOpen, onClose }: QueryFormModalProps)
                 >
                   Back
                 </button>
-                <button
-                  onClick={handleNext}
-                  disabled={
-                    (currentStep === 1 && !isStep1Valid()) || 
-                    (currentStep === 2 && !isStep2Valid()) ||
-                    (currentStep === 3 && !isStep3Valid()) ||
-                    isCheckingAvailability
-                  }
-                  className={`h-12 px-4 rounded text-sm font-space-grotesk font-medium transition-colors leading-[1.28] ${
-                    (currentStep === 1 && !isStep1Valid()) || 
-                    (currentStep === 2 && !isStep2Valid()) ||
-                    (currentStep === 3 && !isStep3Valid()) ||
-                    isCheckingAvailability
-                      ? 'bg-[#E6E6E6] text-[#999999] cursor-not-allowed'
-                      : 'bg-[#333333] text-white hover:bg-[#192C28]'
-                  }`}
-                >
-                  {isCheckingAvailability 
-                    ? 'Checking...' 
-                    : currentStep === 3 
-                      ? (availabilityData?.available ? 'Complete Booking' : 'Join Waiting List')
-                      : 'Next'
-                  }
-                </button>
+                {!(currentStep === 3 && availabilityData?.available) && (
+                  <button
+                    onClick={handleNext}
+                    disabled={
+                      (currentStep === 1 && !isStep1Valid()) || 
+                      (currentStep === 2 && !isStep2Valid()) ||
+                      (currentStep === 3 && !isStep3Valid()) ||
+                      isCheckingAvailability
+                    }
+                    className={`h-12 px-4 rounded text-sm font-space-grotesk font-medium transition-colors leading-[1.28] ${
+                      (currentStep === 1 && !isStep1Valid()) || 
+                      (currentStep === 2 && !isStep2Valid()) ||
+                      (currentStep === 3 && !isStep3Valid()) ||
+                      isCheckingAvailability
+                        ? 'bg-[#E6E6E6] text-[#999999] cursor-not-allowed'
+                        : 'bg-[#333333] text-white hover:bg-[#192C28]'
+                    }`}
+                  >
+                    {isCheckingAvailability 
+                      ? 'Checking...' 
+                      : currentStep === 3 
+                        ? (availabilityData?.available ? 'Complete Booking' : 'Join Waiting List')
+                        : 'Next'
+                    }
+                  </button>
+                )}
             </div>
           )}
           { (showBookingConfirmation || showWaitlistConfirmation) && (
