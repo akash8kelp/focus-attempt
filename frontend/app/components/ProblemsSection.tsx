@@ -46,7 +46,7 @@ const BarChartIcon = () => (
   const problems = [
     {
       icon: <VpnLockIcon />,
-      problem: "Tired of bouncing between Crunchbase, PitchBook, and the likes?",
+      problem: "Tired of juggling multiple data sources?",
       solution: "Pulse gives you exhaustive, verified company intelligence—all from a single platform. No more stale data or wasted hours cross-checking results."
     },
     {
