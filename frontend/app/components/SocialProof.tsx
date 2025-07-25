@@ -46,11 +46,9 @@ export default function SocialProof() {
   const logos = [
     { name: 'KPMG', src: '/assets/kpmg-logo.svg' },
     { name: 'PwC', src: '/assets/pwc-logo.svg' },
-    { name: 'EY', src: '/assets/ey-logo.svg' },
     { name: 'TrueNorth', src: '/assets/truenorth-logo.svg' },
     { name: 'Innova', src: '/assets/innova-logo.svg' },
     { name: 'FSN', src: '/assets/fsn-logo.svg' },
-    { name: 'Deloitte', src: '/assets/deloitte-logo.svg' },
   ];
 
   const LogoItem = ({ src, alt }: { src: string; alt:string }) => (
