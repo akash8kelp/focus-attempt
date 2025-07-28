@@ -1,0 +1,28 @@
+import React from 'react';
+import Image from 'next/image';
+
+const WhatsAppButton = () => {
+  const phoneNumber = '+918369100461';
+  const message = `Ready to go on a business hunt? Awesome!\n\nYour Name:\n\nSearch for (Business Activity):\n\nIn (Countries):\n\nWe'll be back in your inbox in a flash!`;
+
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  return (
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-8 right-8 z-50 p-2 rounded-full hover:bg-[#128C7E] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366] transition-all"
+      aria-label="Chat on WhatsApp"
+    >
+      <Image
+        src="/assets/whatsapp.png"
+        alt="WhatsApp"
+        width={56}
+        height={56}
+      />
+    </a>
+  );
+};
+
+export default WhatsAppButton; 
