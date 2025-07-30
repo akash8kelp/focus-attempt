@@ -2,6 +2,7 @@ import React from 'react'
 import { Instrument_Serif, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import WhatsAppButton from './components/WhatsAppButton'
+import Footer from './components/Footer'
 
 const instrument = Instrument_Serif({
   subsets: ['latin'],
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${instrument.variable} ${grotesk.variable}`}>
         {children}
         <WhatsAppButton />
+        <Footer />
       </body>
     </html>
   )

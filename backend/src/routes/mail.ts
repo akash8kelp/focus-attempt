@@ -15,10 +15,10 @@ router.post('/send-report', async (req: Request, res: Response) => {
     }
 
     const transporter = nodemailer.createTransport({
-        service: 'gmail', // You can use other services like 'SendGrid', 'Outlook365', etc.
+        service: 'Outlook365', // You can use other services like 'SendGrid', 'gmail', etc.
         auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS, // For Gmail, this should be an "App Password", not your regular password
+            user: process.env.EMAIL_USER, // Your Outlook email address
+            pass: process.env.EMAIL_PASS, // Your Outlook password or App Password
         },
     });
 
