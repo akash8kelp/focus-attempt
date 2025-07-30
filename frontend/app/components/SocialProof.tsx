@@ -44,6 +44,10 @@ export default function SocialProof() {
   ];
 
   const logos = [
+    { name: 'Bain Capital', src: '/assets/bain-capital-logo.svg' },
+    { name: 'Ecovium', src: '/assets/ecovium-logo.svg' },
+    { name: 'Solcellespesialisten', src: '/assets/solce-logo.png' },
+    { name: 'United Dental', src: '/assets/uc-logo.png' },
     { name: 'KPMG', src: '/assets/kpmg-logo.svg' },
     { name: 'PwC', src: '/assets/pwc-logo.svg' },
     { name: 'TrueNorth', src: '/assets/truenorth-logo.svg' },

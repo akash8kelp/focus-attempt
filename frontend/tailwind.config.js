@@ -59,8 +59,8 @@ module.exports = {
         '160': '160px'
       },
       animation: {
-        'marquee-sm': 'marquee 10s linear infinite',
-        'marquee-md': 'marquee 25s linear infinite',
+        'marquee-sm': 'marquee 15s linear infinite',
+        'marquee-md': 'marquee 35s linear infinite',
       },
       keyframes: {
         marquee: {
