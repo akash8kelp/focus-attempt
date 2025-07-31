@@ -44,7 +44,8 @@ export default function SocialProof() {
   ];
 
   const logos = [
-    { name: 'Bain Capital', src: '/assets/bain-capital-logo.svg' },
+    { name: 'EMI Group', src: '/assets/emi-logo.webp' },
+    // { name: 'Bain Capital', src: '/assets/bain-capital-logo.svg' },
     { name: 'Ecovium', src: '/assets/ecovium-logo.svg' },
     { name: 'Solcellespesialisten', src: '/assets/solce-logo.png' },
     { name: 'United Dental', src: '/assets/uc-logo.png' },
